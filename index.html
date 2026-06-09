@@ -44,7 +44,8 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 /* ---------- layout shell ---------- */
 #app{min-height:100%;display:flex;flex-direction:column;}
 .view{flex:1;display:none;flex-direction:column;min-height:0;}
-.view.active{display:flex;}
+.view.active{display:flex;animation:viewIn .26s ease both;}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
 
 /* ---------- eyebrow / labels ---------- */
@@ -54,32 +55,90 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 /* ---------- HOME ---------- */
 .home-scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
 .home-header{
+  position:relative;overflow:hidden;
   padding-top:calc(40px + env(safe-area-inset-top));
-  padding-bottom:26px;
-  background:var(--surface-2);
+  padding-bottom:24px;
+  background:linear-gradient(180deg,#13202E 0%,var(--surface-2) 100%);
   border-bottom:1px solid var(--rule);
 }
+.hero-art{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(480px 260px at 88% -12%, rgba(91,141,239,.18), transparent 62%),
+    radial-gradient(360px 220px at -8% 112%, rgba(84,209,131,.06), transparent 60%);}
+.hero-art::after{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(91,141,239,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(91,141,239,.05) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(72% 86% at 72% 14%, #000 0%, transparent 78%);
+  mask-image:radial-gradient(72% 86% at 72% 14%, #000 0%, transparent 78%);}
+.home-header .wrap{position:relative;}
+.home-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;}
+.hero-text{min-width:0;}
 .home-header .eyebrow{margin-bottom:12px;}
-.home-title{font-weight:760;font-size:clamp(28px,7vw,32px);line-height:1.08;letter-spacing:-.02em;margin:0;color:var(--ink);}
+.home-title{font-weight:760;font-size:clamp(27px,6.6vw,38px);line-height:1.06;letter-spacing:-.02em;margin:0;color:var(--ink);}
 .home-title em{font-style:normal;font-weight:760;color:var(--accent);}
-.home-sub{color:var(--inkSoft);margin-top:12px;font-size:15px;font-weight:450;}
-.cards{padding-top:20px;padding-bottom:calc(30px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:13px;}
+.home-sub{color:var(--inkSoft);margin-top:11px;font-size:15px;font-weight:450;}
+
+/* hero ring */
+.hero-ring{flex:none;width:96px;height:96px;}
+.ring{width:100%;height:100%;display:block;}
+.ring-bg{fill:none;stroke:var(--surface-3);stroke-width:6;}
+.ring-fg{fill:none;stroke-width:6;stroke-linecap:round;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1);}
+.ring-num{fill:var(--ink);font-family:var(--sans);font-size:15px;font-weight:760;text-anchor:middle;letter-spacing:-.02em;}
+.ring-cap{fill:var(--inkFaint);font-family:var(--mono);font-size:5.6px;font-weight:600;letter-spacing:.16em;text-anchor:middle;}
+
+/* hero chips */
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;
+  background:rgba(91,141,239,.08);border:1px solid rgba(91,141,239,.22);border-radius:99px;
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--inkSoft);}
+.chip svg{width:13px;height:13px;color:var(--accent);flex:none;}
+.chip b{color:var(--ink);font-weight:700;}
+.chip.ok{background:var(--correctBg);border-color:var(--correctBd);}
+.chip.ok svg{color:var(--correct);}
+
+/* sections */
+.cards{padding-top:22px;padding-bottom:calc(34px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:26px;}
+.sec{display:flex;flex-direction:column;gap:12px;min-width:0;}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:0 2px;}
+.sec-title{font-size:15px;font-weight:740;letter-spacing:-.01em;color:var(--ink);}
+.sec-meta{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--inkFaint);}
+.sec-grid{display:grid;grid-template-columns:1fr;gap:13px;}
+.sec-grid > .card:only-child{grid-column:1/-1;}
+
 .card{
   display:flex;gap:15px;align-items:flex-start;text-align:left;width:100%;
   background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:17px;
-  box-shadow:var(--sh);
-  transition:border-color .15s ease, box-shadow .15s ease, transform .06s ease, background .15s ease;
+  box-shadow:var(--sh);position:relative;
+  transition:border-color .18s ease, box-shadow .18s ease, transform .14s ease, background .18s ease;
 }
-.card:active{transform:translateY(1px);}
-.card:hover{border-color:var(--ruleStrong);background:#18242F;}
-.card-icon{flex:none;width:50px;height:50px;background:var(--surface-3);color:var(--accent);border:1px solid var(--ruleStrong);border-radius:var(--rsm);
+.card:active{transform:translateY(1px) scale(.995);}
+.card:hover{border-color:rgba(91,141,239,.45);background:#18242F;box-shadow:var(--shLg);transform:translateY(-2px);}
+.card:hover .card-chevron{color:var(--accent);transform:translateX(2px);}
+.card-icon{flex:none;width:48px;height:48px;background:var(--surface-3);color:var(--accent);border:1px solid var(--ruleStrong);border-radius:var(--rsm);
   display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em;}
+.card-icon svg{width:23px;height:23px;}
 .card-main{flex:1;min-width:0;}
+.card-in{animation:cardIn .42s cubic-bezier(.2,.7,.2,1) both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
 .card-meta,.card-name,.card-desc,.card-progress{display:block;}
 .card-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--inkFaint);}
 .card-name{font-weight:700;font-size:19px;line-height:1.2;letter-spacing:-.01em;margin:5px 0 4px;color:var(--ink);}
 .card-desc{font-size:13.5px;color:var(--inkSoft);line-height:1.45;}
-.card-chevron{flex:none;align-self:center;font-size:24px;color:var(--inkFaint);font-weight:400;}
+.card-chevron{flex:none;align-self:center;font-size:24px;color:var(--inkFaint);font-weight:400;transition:color .18s ease,transform .18s ease;}
+
+/* featured exam card */
+.card-exam{
+  background:linear-gradient(135deg, rgba(91,141,239,.16) 0%, rgba(91,141,239,.05) 42%, var(--surface) 100%);
+  border:1px solid rgba(91,141,239,.45);
+}
+.card-exam::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(300px 140px at 100% 0%, rgba(91,141,239,.14), transparent 70%);}
+.card-exam:hover{border-color:var(--accent);}
+.card-exam .card-icon{background:var(--accent);color:#0B1119;border-color:var(--accent);
+  box-shadow:0 4px 14px rgba(91,141,239,.35);}
 
 /* card progress */
 .card-progress{margin-top:18px;}
@@ -194,8 +253,9 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   transition:background .12s ease,border-color .12s ease,transform .06s ease,box-shadow .12s ease;}
 .nav-btn:active{transform:translateY(1px);}
 .nav-btn:hover{border-color:var(--inkFaint);}
-.nav-btn.primary{background:var(--accent);color:#0B1119;border-color:var(--accent);box-shadow:var(--sh);}
-.nav-btn.primary:hover{background:var(--accentDark);border-color:var(--accentDark);}
+.nav-btn.primary{background:linear-gradient(180deg,#6E9AF2 0%,var(--accent) 55%,var(--accentDark) 100%);
+  color:#0B1119;border-color:var(--accentDark);box-shadow:0 5px 16px rgba(91,141,239,.28);}
+.nav-btn.primary:hover{filter:brightness(1.06);}
 .nav-btn.primary:disabled,.nav-btn:disabled{opacity:1;cursor:not-allowed;background:var(--surface-3);color:var(--inkFaint);border-color:var(--rule);transform:none;box-shadow:none;}
 
 /* ---------- RESULTS ---------- */
@@ -245,7 +305,6 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .exam-row-val{flex:none;width:44px;text-align:right;font-family:var(--mono);font-size:12px;font-weight:600;}
 .exam-row-val.pass{color:var(--correct);} .exam-row-val.fail{color:var(--accent);}
 .review-part{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:20px 0 2px;padding-top:6px;border-top:1px solid var(--rule);}
-.card-exam .card-icon{background:var(--accent);color:var(--onAccent);border-color:var(--accent);}
 
 /* ---------- modal ---------- */
 .modal-back{position:fixed;inset:0;background:rgba(4,8,13,.66);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;}
@@ -257,23 +316,34 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .modal-actions .nav-btn{flex:1;}
 
 /* ---------- responsive ---------- */
+@media (max-width:419px){
+  .hero-ring{width:82px;height:82px;}
+}
 @media (min-width:600px){
   :root{--pad:32px;}
   body{font-size:17px;}
-  .home-header{padding-top:calc(54px + env(safe-area-inset-top));}
-  .card{padding:22px;}
-  .card-icon{width:58px;height:58px;font-size:15px;}
-  .card-name{font-size:22px;}
+  .home-header{padding-top:calc(50px + env(safe-area-inset-top));padding-bottom:30px;}
+  .hero-ring{width:112px;height:112px;}
+  .hero-chips{margin-top:22px;gap:10px;}
+  .chip{font-size:11.5px;padding:8px 14px;}
+  .card{padding:21px;}
+  .card-icon{width:54px;height:54px;}
+  .card-icon svg{width:26px;height:26px;}
+  .card-name{font-size:21px;}
+  .sec-title{font-size:16.5px;}
   .options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .q-prompt{font-size:24px;}
   .passage-pane{max-height:40vh;}
   .passage-text{font-size:16.5px;}
 }
+@media (min-width:720px){
+  .sec-grid{grid-template-columns:1fr 1fr;gap:15px;}
+}
 @media (min-width:1000px){
-  :root{--maxw:880px;--pad:40px;}
-  .home-title{font-size:46px;}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
-  .install-area{grid-column:1 / -1;}
+  :root{--maxw:920px;--pad:40px;}
+  .home-header{padding-top:calc(62px + env(safe-area-inset-top));padding-bottom:34px;}
+  .hero-ring{width:124px;height:124px;}
+  .cards{padding-top:28px;gap:30px;}
 }
 @media (min-width:600px) and (orientation:landscape){
   .passage-pane{max-height:38vh;}
@@ -283,6 +353,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 }
 @media (prefers-reduced-motion:reduce){
   .gap.active{animation:none;box-shadow:0 0 0 3px rgba(91,141,239,.28);}
+  .view.active,.card-in{animation:none;}
   *{transition:none !important;}
 }
 </style>
@@ -294,10 +365,17 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   <section id="view-home" class="view active">
     <div class="home-scroll">
       <header class="home-header">
+        <div class="hero-art" aria-hidden="true"></div>
         <div class="wrap">
-          <div class="eyebrow">Cambridge C1 Advanced</div>
-          <h1 class="home-title">Reading &amp; <em>Use of English</em></h1>
-          <p class="home-sub">Übungs-Trainer · Bestehen ab 60&nbsp;%</p>
+          <div class="home-hero">
+            <div class="hero-text">
+              <div class="eyebrow">Cambridge C1 Advanced</div>
+              <h1 class="home-title">Reading &amp; <em>Use of English</em></h1>
+              <p class="home-sub">Übungs-Trainer · Bestehen ab 60&nbsp;%</p>
+            </div>
+            <div class="hero-ring" id="hero-ring" aria-hidden="true"></div>
+          </div>
+          <div class="hero-chips" id="hero-chips"></div>
           <div class="install-area" id="install-area" hidden>
             <button class="install-btn" id="install-btn">⤓ Als App installieren</button>
             <p class="install-hint" id="install-hint" hidden></p>
@@ -1933,75 +2011,116 @@ function show(viewId) {
 }
 
 /* ---------------- HOME ---------------- */
-function renderHome() {
-  const scores = loadScores();
-  const html = DATA.categories.map(c => {
-    const s = scores[c.id];
-    let progress;
-    if (s) {
-      const best = s.best != null ? s.best : s.pct;
-      const bp = Math.round(best * 100);
-      const passed = best >= PASS_THRESHOLD;
-      const cls = passed ? 'pass' : 'fail';
-      const status = passed ? '✓ Bestanden' : 'Ziel: 60 %';
-      progress = `
-        <span class="card-progress">
-          <span class="cp-bar"><span class="cp-fill ${cls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
-          <span class="cp-labels"><span class="cp-pct ${cls}">${bp}%</span><span class="cp-status">${status}</span></span>
-        </span>`;
-    } else {
-      progress = `
-        <span class="card-progress">
-          <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
-          <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">Noch nicht geübt</span></span>
-        </span>`;
-    }
-    return `
-      <button class="card" data-cat="${c.id}">
-        <span class="card-icon">${escapeHtml(c.icon)}</span>
-        <span class="card-main">
-          <span class="card-meta">${escapeHtml(c.shortName)} · ${c.sessionLength} Q · Pool ${poolSize(c)}</span>
-          <span class="card-name">${escapeHtml(c.name)}</span>
-          <span class="card-desc">${escapeHtml(c.description)}</span>
-          ${progress}
-        </span>
-        <span class="card-chevron">›</span>
-      </button>`;
-  }).join('');
+const ICONS = {
+  part1: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h9M4 11.5h6M4 17h8"/><circle cx="17" cy="15.5" r="4.4"/><path d="M15.2 15.6l1.3 1.3 2.3-2.6"/></svg>',
+  part2: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 11.5h4.5M15.5 11.5H20M4 17h16"/><rect x="10" y="9.6" width="4" height="3.8" rx="1.2" stroke-dasharray="2.4 2"/></svg>',
+  part3: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17.5L8 7l4 10.5M5.3 14h5.4"/><path d="M14.5 9.5H20m0 0l-2.2-2.2M20 9.5l-2.2 2.2"/><path d="M15.5 16.5c0 1.4 1.1 2 2.3 2s2.2-.6 2.2-2-1-2-2.2-2"/></svg>',
+  part4: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h13.5m0 0L14.6 5.6M17.5 8.5l-2.9 2.9"/><path d="M20 15.5H6.5m0 0l2.9-2.9M6.5 15.5l2.9 2.9"/></svg>',
+  reading: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.2C10 4.8 7.6 4.2 4 4.2v13.6c3.6 0 6 .6 8 2 2-1.4 4.4-2 8-2V4.2c-3.6 0-6 .6-8 2z"/><path d="M12 6.2v13.6"/></svg>',
+  exam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L2.8 8.4 12 12.8l9.2-4.4L12 4z"/><path d="M6.2 10.8v4.6c0 1.5 11.6 1.5 11.6 0v-4.6"/><path d="M21.2 8.4v5.2"/></svg>'
+};
+const ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+const ICON_STACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5L3 8l9 4.5L21 8l-9-4.5z"/><path d="M3 12.5l9 4.5 9-4.5"/><path d="M3 17l9 4.5L21 17"/></svg>';
+const ICON_LOOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6h-6"/><path d="M4 19v-6h6"/><path d="M19.3 11A7.6 7.6 0 0 0 6 7.3L4 9.2M4.7 13A7.6 7.6 0 0 0 18 16.7l2-1.9"/></svg>';
 
-  // Prüfungssimulation-Karte
-  const es = scores['exam'];
-  let examProgress;
-  if (es) {
-    const best = es.best != null ? es.best : es.pct;
+function bestOf(s) { return s ? (s.best != null ? s.best : s.pct) : 0; }
+
+function ringSvg(pct) {
+  const R = 26, C = 2 * Math.PI * R;
+  const off = C * (1 - Math.min(1, Math.max(0, pct)));
+  const col = pct >= PASS_THRESHOLD ? 'var(--correct)' : 'var(--accent)';
+  return `<svg class="ring" viewBox="0 0 64 64" role="img">
+    <circle class="ring-bg" cx="32" cy="32" r="${R}"/>
+    <circle class="ring-fg" cx="32" cy="32" r="${R}" style="stroke:${col};stroke-dasharray:${C.toFixed(1)};stroke-dashoffset:${off.toFixed(1)}"/>
+    <text class="ring-num" x="32" y="32.5">${Math.round(pct * 100)}%</text>
+    <text class="ring-cap" x="32" y="43">GESAMT</text>
+  </svg>`;
+}
+
+function progressHtml(s, emptyLabel) {
+  if (s) {
+    const best = bestOf(s);
     const bp = Math.round(best * 100);
     const passed = best >= PASS_THRESHOLD;
-    const ecls = passed ? 'pass' : 'fail';
-    examProgress = `
+    const cls = passed ? 'pass' : 'fail';
+    return `
       <span class="card-progress">
-        <span class="cp-bar"><span class="cp-fill ${ecls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
-        <span class="cp-labels"><span class="cp-pct ${ecls}">${bp}%</span><span class="cp-status">${passed ? '✓ Bestanden' : 'Ziel: 60 %'}</span></span>
-      </span>`;
-  } else {
-    examProgress = `
-      <span class="card-progress">
-        <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
-        <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">Noch nicht versucht</span></span>
+        <span class="cp-bar"><span class="cp-fill ${cls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
+        <span class="cp-labels"><span class="cp-pct ${cls}">${bp}%</span><span class="cp-status">${passed ? '✓ Bestanden' : 'Ziel: 60 %'}</span></span>
       </span>`;
   }
-  const examCard = `
-    <button class="card card-exam" data-exam="1">
-      <span class="card-icon">EX</span>
+  return `
+    <span class="card-progress">
+      <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
+      <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">${emptyLabel}</span></span>
+    </span>`;
+}
+
+function categoryCard(c, scores, delay) {
+  return `
+    <button class="card card-in" style="animation-delay:${delay}ms" data-cat="${c.id}">
+      <span class="card-icon">${ICONS[c.id] || escapeHtml(c.icon)}</span>
       <span class="card-main">
-        <span class="card-meta">Prüfung · alle Teile</span>
-        <span class="card-name">Prüfungssimulation</span>
-        <span class="card-desc">Kompletter Durchlauf: Part 1–4 plus Reading (Part 5 &amp; 7), mit Gesamtauswertung.</span>
-        ${examProgress}
+        <span class="card-meta">${escapeHtml(c.shortName)} · ${c.sessionLength} Q · Pool ${poolSize(c)}</span>
+        <span class="card-name">${escapeHtml(c.name)}</span>
+        <span class="card-desc">${escapeHtml(c.description)}</span>
+        ${progressHtml(scores[c.id], 'Noch nicht geübt')}
       </span>
       <span class="card-chevron">›</span>
     </button>`;
+}
 
-  $('#cards').innerHTML = html + examCard;
+function renderHome() {
+  const scores = loadScores();
+  const useOfEnglish = DATA.categories.filter(c => c.id.startsWith('part'));
+  const readingCats = DATA.categories.filter(c => c.type === 'reading');
+
+  // Hero: Ring (Ø Bestwert über alle 6 Modi) + Chips
+  const allIds = DATA.categories.map(c => c.id).concat(['exam']);
+  const avg = allIds.reduce((n, id) => n + bestOf(scores[id]), 0) / allIds.length;
+  const passedCount = allIds.filter(id => bestOf(scores[id]) >= PASS_THRESHOLD).length;
+  const totalPool = DATA.categories.reduce((n, c) => n + poolSize(c), 0);
+  const attempts = allIds.reduce((n, id) => n + (scores[id] ? (scores[id].attempts || 0) : 0), 0);
+  $('#hero-ring').innerHTML = ringSvg(avg);
+  $('#hero-chips').innerHTML = `
+    <span class="chip ${passedCount === allIds.length && attempts > 0 ? 'ok' : ''}">${ICON_CHECK}<b>${passedCount}/${allIds.length}</b>&nbsp;bestanden</span>
+    <span class="chip">${ICON_STACK}<b>${totalPool}</b>&nbsp;Fragen im Pool</span>
+    <span class="chip">${ICON_LOOP}<b>${attempts}</b>&nbsp;Sessions</span>`;
+
+  let d = 0;
+  const next = () => { d += 40; return d; };
+  const sections = [];
+
+  sections.push(`
+    <div class="sec">
+      <div class="sec-head"><span class="sec-title">Use of English</span><span class="sec-meta">Part 1–4</span></div>
+      <div class="sec-grid">${useOfEnglish.map(c => categoryCard(c, scores, next())).join('')}</div>
+    </div>`);
+
+  if (readingCats.length) {
+    sections.push(`
+      <div class="sec">
+        <div class="sec-head"><span class="sec-title">Reading</span><span class="sec-meta">Part 5 &amp; 7</span></div>
+        <div class="sec-grid">${readingCats.map(c => categoryCard(c, scores, next())).join('')}</div>
+      </div>`);
+  }
+
+  sections.push(`
+    <div class="sec">
+      <div class="sec-head"><span class="sec-title">Prüfung</span><span class="sec-meta">Alle Teile</span></div>
+      <button class="card card-exam card-in" style="animation-delay:${next()}ms" data-exam="1">
+        <span class="card-icon">${ICONS.exam}</span>
+        <span class="card-main">
+          <span class="card-meta">Prüfung · alle Teile · 43 Q</span>
+          <span class="card-name">Prüfungssimulation</span>
+          <span class="card-desc">Kompletter Durchlauf: Part 1–4 plus Reading (Part 5 &amp; 7), mit Gesamtauswertung.</span>
+          ${progressHtml(scores['exam'], 'Noch nicht versucht')}
+        </span>
+        <span class="card-chevron">›</span>
+      </button>
+    </div>`);
+
+  $('#cards').innerHTML = sections.join('');
   $('#cards').querySelectorAll('.card[data-cat]').forEach(el =>
     el.addEventListener('click', () => startQuiz(el.dataset.cat)));
   const ec = $('#cards').querySelector('.card[data-exam]');
