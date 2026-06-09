@@ -15,7 +15,7 @@ String normalize(String s) {
 
 /// Prüft eine Antwort gegen die Lösung.
 bool isCorrect(Question q, Object? answer) {
-  if (q.type == QType.mc) return answer == q.correct;
+  if (q.type == QType.mc) return answer == q.correct || (q.also?.contains(answer) ?? false);
   if (answer == null || answer.toString().trim().isEmpty) return false;
   final n = normalize(answer.toString());
   return (q.accept ?? const []).any((acc) => normalize(acc) == n);
