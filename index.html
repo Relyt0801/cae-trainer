@@ -132,6 +132,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
   max-height:32vh;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:none;
 }
 .passage-pane .wrap{padding-top:18px;padding-bottom:20px;}
+.passage-pane.reading{max-height:54vh;}
 .passage-title{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--inkFaint);margin-bottom:12px;}
 .passage-text{font-size:15.5px;line-height:1.95;color:var(--inkSoft);}
 .gap{font-family:var(--mono);font-size:.82em;font-weight:600;letter-spacing:.01em;padding:2px 9px;border:1px solid var(--ruleStrong);
@@ -234,6 +235,17 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .rev-ans .you s{text-decoration:line-through;text-decoration-color:var(--wrong);}
 .rev-ans .right{color:var(--correct);font-weight:600;}
 .rev-exp{font-size:14px;color:var(--inkSoft);line-height:1.5;margin-top:4px;}
+.rev-prompt{font-size:14.5px;color:var(--ink);line-height:1.45;margin-bottom:7px;}
+.exam-breakdown{margin:20px auto 0;max-width:460px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.exam-row{display:flex;align-items:center;gap:11px;}
+.exam-row-label{flex:1;font-size:12.5px;color:var(--inkSoft);min-width:0;}
+.exam-row-bar{flex:none;width:88px;height:7px;background:var(--surface-3);border-radius:99px;overflow:hidden;}
+.exam-row-fill{display:block;height:100%;border-radius:99px;}
+.exam-row-fill.pass{background:var(--correct);} .exam-row-fill.fail{background:var(--accent);}
+.exam-row-val{flex:none;width:44px;text-align:right;font-family:var(--mono);font-size:12px;font-weight:600;}
+.exam-row-val.pass{color:var(--correct);} .exam-row-val.fail{color:var(--accent);}
+.review-part{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:20px 0 2px;padding-top:6px;border-top:1px solid var(--rule);}
+.card-exam .card-icon{background:var(--accent);color:var(--onAccent);border-color:var(--accent);}
 
 /* ---------- modal ---------- */
 .modal-back{position:fixed;inset:0;background:rgba(4,8,13,.66);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;}
@@ -889,6 +901,919 @@ const DATA = {
         { type:'transform', original:'I have never eaten such delicious food.', keyword:'MOST', gapped:'This is _____ I have ever eaten.', accept:['the most delicious food'], explanation:'Superlativ + Present Perfect: "the most … I have ever".' },
         { type:'transform', original:'Nobody has ever spoken to me like that before.', keyword:'TIME', gapped:'It is _____ has spoken to me like that.', accept:['the first time anyone','the first time anybody'], explanation:'"It is the first time + Present Perfect".' }
       ]
+    },
+    {
+      "id": "reading",
+      "shortName": "Reading",
+      "name": "Reading & Comprehension",
+      "type": "reading",
+      "icon": "RD",
+      "sessionLength": 6,
+      "description": "Leseverständnis nach Cambridge: Multiple Choice (Part 5) und Multiple Matching (Part 7).",
+      "passages": [
+        {
+          "title": "The Quiet Revolution of Lichens",
+          "kind": "rc",
+          "text": "For centuries lichens were dismissed as a botanical curiosity, mere splashes of grey-green decorating gravestones and weathered rooftops. Modern biology, however, has recast them as one of nature’s most instructive collaborations. A lichen is not a single organism but a partnership: a fungus provides structure and shelter, while an alga or cyanobacterium supplies sugars through photosynthesis. Recent research has complicated even this neat picture, revealing that many lichens harbour a second, hidden fungus, suggesting that what looked like a marriage of two is closer to a small society.\n\nThis cooperative arrangement endows lichens with a startling resilience. They colonise surfaces that defeat almost every other form of life: bare rock, Arctic tundra, even the sun-blasted exteriors of desert boulders. Capable of suspending their metabolism entirely when conditions turn hostile, they can revive after years of dormancy as soon as moisture returns. It is this capacity that allows them to survive where soil has yet to form, slowly etching minerals from stone and preparing the ground, quite literally, for the plants that follow.\n\nYet the same sensitivity that makes lichens hardy also makes them vulnerable. Because they absorb water and nutrients directly from the air rather than through roots, they accumulate whatever the atmosphere carries, including pollutants. Their presence or absence has consequently become a reliable barometer of air quality: a city whose stonework is bare of lichen is often a city whose air is foul. Scientists now map lichen distribution to track industrial emissions with a precision that expensive instruments struggle to match. The humble crust on a churchyard wall, it turns out, has been quietly keeping records all along.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the main point the writer makes about lichens?",
+              "options": [
+                "They are a single species of fungus.",
+                "They have been reassessed as a complex and valuable partnership.",
+                "They are harmful to the stone surfaces they grow on.",
+                "They are too fragile to survive in harsh climates."
+              ],
+              "correct": 1,
+              "explanation": "Der Text beschreibt lichens als „one of nature’s most instructive collaborations“ und als wertvolle Partnerschaft. A widerspricht „not a single organism“; D widerspricht der „startling resilience“."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "What did recent research reveal that complicated the traditional view?",
+              "options": [
+                "That lichens contain a second, hidden fungus.",
+                "That the alga can survive without the fungus.",
+                "That lichens cannot photosynthesise.",
+                "That lichens are actually plants."
+              ],
+              "correct": 0,
+              "explanation": "„many lichens harbour a second, hidden fungus“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "In the second paragraph, what is implied about lichens’ role in ecosystems?",
+              "options": [
+                "They prevent other plants from growing.",
+                "They help create conditions that allow later plants to grow.",
+                "They depend on existing soil to survive.",
+                "They destroy minerals in rock permanently."
+              ],
+              "correct": 1,
+              "explanation": "„preparing the ground … for the plants that follow“. C widerspricht, da sie wachsen, „where soil has yet to form“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "Why are lichens useful as indicators of air quality?",
+              "options": [
+                "They grow faster in polluted air.",
+                "They absorb airborne substances directly, including pollutants.",
+                "They change colour when exposed to oxygen.",
+                "They only grow inside cities."
+              ],
+              "correct": 1,
+              "explanation": "Sie nehmen Stoffe „directly from the air“ auf und dienen als „barometer of air quality“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What does the phrase \"keeping records all along\" suggest in the final sentence?",
+              "options": [
+                "Lichens have been documenting pollution unnoticed for a long time.",
+                "Lichens are written about in old churchyard archives.",
+                "Lichens grow only on official monuments.",
+                "Lichens have stopped responding to pollution."
+              ],
+              "correct": 0,
+              "explanation": "Metapher: lichens haben unbemerkt die Luftqualität „aufgezeichnet“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What is the writer’s attitude towards lichens?",
+              "options": [
+                "Dismissive of their importance.",
+                "Appreciative of their overlooked significance.",
+                "Anxious about their spread.",
+                "Indifferent to their biology."
+              ],
+              "correct": 1,
+              "explanation": "„humble“, „quietly“ und die Aufwertung von „curiosity“ zeigen eine würdigende Haltung."
+            }
+          ]
+        },
+        {
+          "title": "The Cartographer’s Dilemma",
+          "kind": "rc",
+          "text": "Every map is a lie, though usually a useful one. The moment a cartographer attempts to represent the curved surface of the Earth on a flat sheet, distortion becomes unavoidable; the only question is which kind of distortion to accept. The famous Mercator projection, devised in the sixteenth century for maritime navigation, preserves the angles sailors needed to plot a steady course. To achieve this, however, it grossly inflates the land masses near the poles, so that Greenland appears comparable in size to Africa, when in reality Africa is some fourteen times larger.\n\nFor generations this exaggeration passed almost unremarked, a technical compromise hidden in plain sight on classroom walls. Critics later argued that the distortion was not neutral. By enlarging the temperate northern continents while shrinking the equatorial regions, the Mercator map, they claimed, subtly flattered the very nations that had produced and printed it. Whether or not the original intent was political, the visual impression undeniably shaped how millions of children pictured the relative importance of the world’s regions.\n\nAlternatives exist, each making its own bargain. The Gall-Peters projection corrects the areas faithfully but stretches shapes into unfamiliar elongations that many find unappealing. Others compromise between area and form, accepting modest errors in both rather than perfection in either. There is, in the end, no honest map that is also complete; the cartographer must always choose what to sacrifice. Recognising this does not diminish maps so much as clarify what they are. They are not windows onto reality but arguments about it, and the wise reader learns to ask not merely where a place is, but what a particular map was made to emphasise.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the central idea of the passage?",
+              "options": [
+                "The Mercator projection is the most accurate map available.",
+                "All flat maps involve unavoidable distortion and choices about what to sacrifice.",
+                "Maps should never be used in classrooms.",
+                "Modern technology has eliminated map distortion."
+              ],
+              "correct": 1,
+              "explanation": "Jede flache Karte verzerrt; der Kartograf „must always choose what to sacrifice“."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "Why was the Mercator projection originally created?",
+              "options": [
+                "To exaggerate the size of northern countries.",
+                "To help sailors navigate by preserving angles.",
+                "To show continents in their true proportions.",
+                "To decorate classroom walls."
+              ],
+              "correct": 1,
+              "explanation": "„for maritime navigation“, bewahrt „the angles sailors needed“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "What criticism did some people make of the Mercator map?",
+              "options": [
+                "That it was too difficult for sailors to use.",
+                "That its distortion subtly favoured powerful northern nations.",
+                "That it made Africa look too large.",
+                "That it could not be printed accurately."
+              ],
+              "correct": 1,
+              "explanation": "Sie „subtly flattered the very nations that had produced and printed it“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "What is the drawback of the Gall-Peters projection?",
+              "options": [
+                "It distorts the angles sailors need.",
+                "It exaggerates polar regions.",
+                "It corrects areas but stretches shapes unattractively.",
+                "It shrinks the equatorial regions."
+              ],
+              "correct": 2,
+              "explanation": "„corrects the areas faithfully but stretches shapes into unfamiliar elongations“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What does the writer mean by saying maps are \"arguments about\" reality rather than \"windows onto\" it?",
+              "options": [
+                "Maps cause political disputes.",
+                "Maps present a chosen interpretation rather than a neutral picture.",
+                "Maps are usually badly drawn.",
+                "Maps should be looked through like glass."
+              ],
+              "correct": 1,
+              "explanation": "Karten treffen eine Auswahl und Betonung, bilden also nicht neutral ab."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What does \"this\" refer to in the phrase \"Recognising this does not diminish maps\"?",
+              "options": [
+                "The Gall-Peters projection.",
+                "The fact that no map can be both honest and complete.",
+                "The political intent of cartographers.",
+                "The size of Greenland."
+              ],
+              "correct": 1,
+              "explanation": "„this“ verweist auf „there is … no honest map that is also complete“."
+            }
+          ]
+        },
+        {
+          "title": "Why We Forget on Purpose",
+          "kind": "rc",
+          "text": "We tend to think of forgetting as a failure, the unfortunate decay of a memory we would rather have kept. Yet a growing body of psychological research suggests that forgetting is not simply the breakdown of the mind’s machinery but, in many cases, an active and even purposeful process. The brain, it appears, is as much in the business of discarding information as of storing it, and there are good reasons why this should be so.\n\nConsider the alternative. A handful of individuals possess what researchers call highly superior autobiographical memory, recalling the trivial details of distant days with uncanny precision. Far from envying them, many report that this relentless retention is a burden; old grievances never soften, embarrassing moments remain perpetually vivid, and the past crowds in upon the present. Ordinary forgetting, by contrast, allows the emotional sting of experience to fade, smoothing the rough edges of memory so that we can move forward unencumbered.\n\nForgetting also serves a subtler cognitive purpose. By shedding outdated or irrelevant specifics, the mind distils experience into general principles that transfer to new situations. A child who forgets the exact wording of a hundred stories may nonetheless absorb the deeper grammar of narrative itself. In this sense, the gaps in our recollection are not holes but filters. What looks like loss is frequently a kind of editing, and a mind that remembered everything might, paradoxically, understand far less. To forget well, the research implies, is part of thinking well.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the main argument of the passage?",
+              "options": [
+                "Forgetting is always a sign of mental decline.",
+                "Forgetting can be a useful and purposeful process.",
+                "Perfect memory is something everyone should want.",
+                "Memory cannot be studied scientifically."
+              ],
+              "correct": 1,
+              "explanation": "Vergessen sei „an active and even purposeful process“ mit Nutzen."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "What do many people with highly superior autobiographical memory report?",
+              "options": [
+                "That their ability is purely advantageous.",
+                "That the constant retention of detail is a burden.",
+                "That they forget emotional events easily.",
+                "That they cannot recall distant days."
+              ],
+              "correct": 1,
+              "explanation": "„many report that this relentless retention is a burden“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "According to the passage, how does ordinary forgetting help us emotionally?",
+              "options": [
+                "It makes embarrassing moments more vivid.",
+                "It allows the emotional pain of experiences to fade.",
+                "It prevents us from learning anything new.",
+                "It keeps old grievances sharp."
+              ],
+              "correct": 1,
+              "explanation": "„allows the emotional sting of experience to fade“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "What cognitive benefit of forgetting does the third paragraph describe?",
+              "options": [
+                "It helps the mind extract general principles from experience.",
+                "It improves the recall of exact details.",
+                "It increases the number of stored memories.",
+                "It prevents children from learning language."
+              ],
+              "correct": 0,
+              "explanation": "„distils experience into general principles“; das Kind erfasst „the deeper grammar of narrative“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What does the writer mean by describing memory gaps as \"filters\" rather than \"holes\"?",
+              "options": [
+                "Memory gaps are random mistakes.",
+                "Memory gaps usefully remove unnecessary information.",
+                "Memory gaps cannot be controlled.",
+                "Memory gaps always cause confusion."
+              ],
+              "correct": 1,
+              "explanation": "„filters“ betont nützliche Auswahl, „a kind of editing“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What can be inferred from the closing sentence about a mind that remembered everything?",
+              "options": [
+                "It would necessarily understand the world better.",
+                "It might actually understand less than a forgetful mind.",
+                "It would be free of all emotional pain.",
+                "It would think more quickly."
+              ],
+              "correct": 1,
+              "explanation": "„a mind that remembered everything might, paradoxically, understand far less“."
+            }
+          ]
+        },
+        {
+          "title": "The Slow Birth of the Public Park",
+          "kind": "rc",
+          "text": "The idea that a city should set aside large tracts of land purely for the leisure of ordinary people is so familiar today that it seems almost natural. For most of history, however, it would have struck rulers as absurd. Open green spaces within or around cities certainly existed, but they were typically the private hunting grounds of monarchs or the manicured gardens of the aristocracy, walled off from the labouring majority. The notion that a weaver or a clerk might stroll across the same lawns as a duke was, for centuries, unthinkable.\n\nThe transformation came with the upheavals of the nineteenth century. As industrial cities swelled, their inhabitants crowded into districts so dense and smoke-choked that reformers feared for both the health and the morality of the population. A park, it was argued, could function as the \"lungs\" of a city, admitting light and air, while also offering a wholesome alternative to the tavern. Crucially, advocates insisted that these spaces be open to all classes, partly out of genuine democratic conviction and partly from a calculated hope that mingling with their social superiors might refine the manners of the poor.\n\nThe results rarely matched the rhetoric. Rules against ball games, drinking and loud assembly often made the new parks feel less like havens of freedom than open-air classrooms in respectable behaviour. Yet for all their paternalism, these spaces established a lasting principle. Once a city had granted its people the right to green and open ground, that right proved remarkably difficult to revoke. The public park, born of mixed and sometimes condescending motives, quietly became one of the most enduring democratic institutions of the modern city.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the passage mainly about?",
+              "options": [
+                "The decline of aristocratic gardens.",
+                "How and why public parks came to exist.",
+                "The health problems of industrial cities.",
+                "The rules that govern modern parks."
+              ],
+              "correct": 1,
+              "explanation": "Der Text verfolgt Entstehung und Begründung öffentlicher Parks."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "What were urban green spaces like for most of history?",
+              "options": [
+                "Open to all citizens equally.",
+                "Mostly private grounds for royalty or aristocracy.",
+                "Used only for industrial purposes.",
+                "Nonexistent in any form."
+              ],
+              "correct": 1,
+              "explanation": "„the private hunting grounds of monarchs or the manicured gardens of the aristocracy“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "Why did reformers in the nineteenth century support creating parks?",
+              "options": [
+                "To increase aristocratic privilege.",
+                "To improve public health and provide an alternative to the tavern.",
+                "To reduce the size of cities.",
+                "To ban all forms of recreation."
+              ],
+              "correct": 1,
+              "explanation": "Parks als „lungs“ und „wholesome alternative to the tavern“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "What does the word \"paternalism\" suggest about the spirit of the early parks?",
+              "options": [
+                "They were designed by city fathers for profit.",
+                "They treated visitors as people needing moral guidance.",
+                "They were funded entirely by the poor.",
+                "They had no rules at all."
+              ],
+              "correct": 1,
+              "explanation": "Regeln und „open-air classrooms in respectable behaviour“ zeigen Bevormundung."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What is implied about the motives behind the public park?",
+              "options": [
+                "They were entirely democratic and pure.",
+                "They mixed genuine idealism with condescending aims.",
+                "They were purely commercial.",
+                "They were intended to exclude the poor."
+              ],
+              "correct": 1,
+              "explanation": "„mixed and sometimes condescending motives“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What does the writer suggest about the lasting significance of public parks?",
+              "options": [
+                "They quickly disappeared after creation.",
+                "They became a durable democratic right hard to take away.",
+                "They remained restricted to the wealthy.",
+                "They failed to influence later cities."
+              ],
+              "correct": 1,
+              "explanation": "„that right proved remarkably difficult to revoke“; „one of the most enduring democratic institutions“."
+            }
+          ]
+        },
+        {
+          "title": "The Sound of Silence in Music",
+          "kind": "rc",
+          "text": "Audiences often assume that music is made of notes, and that the spaces between them are simply gaps to be endured on the way to the next sound. Composers know better. Silence, the deliberate absence of sound, is among the most powerful tools available to a musician, and its mastery distinguishes the merely competent from the genuinely expressive. A rest placed with precision can heighten tension, lend weight to the phrase that follows, or allow an emotion to settle before the next idea arrives.\n\nThe history of Western music is, in part, a history of learning to trust silence. Early composers tended to fill every available moment, as though afraid that a pause might be mistaken for a mistake. Gradually, however, musicians discovered that what is withheld can move a listener as deeply as what is played. A sudden hush before a triumphant chord makes the resolution all the sweeter; a long silence in a slow movement can feel almost unbearable, charged with the anticipation of what must surely come.\n\nThis principle reaches its provocative extreme in works that consist almost entirely of silence, inviting the audience to attend instead to the ambient sounds of the room and their own restless expectation. Such pieces are easy to mock, yet they make a serious point. They remind us that the frame around the music shapes our experience of it, and that listening is never passive. The composer who understands silence is not abandoning sound but sharpening it, for a note means little until we have felt the stillness it interrupts.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the main idea of the passage?",
+              "options": [
+                "Music should contain as many notes as possible.",
+                "Silence is a powerful and expressive element of music.",
+                "Early composers were more skilled than modern ones.",
+                "Audiences dislike pauses in music."
+              ],
+              "correct": 1,
+              "explanation": "Stille sei „among the most powerful tools available to a musician“."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "According to the writer, what distinguishes a genuinely expressive musician?",
+              "options": [
+                "The ability to play very fast.",
+                "Mastery of the use of silence.",
+                "Filling every moment with sound.",
+                "Avoiding all rests."
+              ],
+              "correct": 1,
+              "explanation": "„its mastery distinguishes the merely competent from the genuinely expressive“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "What did early Western composers tend to do, and why?",
+              "options": [
+                "Leave long silences to create tension deliberately.",
+                "Fill every moment, fearing a pause might seem like a mistake.",
+                "Avoid writing chords entirely.",
+                "Compose only slow movements."
+              ],
+              "correct": 1,
+              "explanation": "Sie füllten „every available moment, as though afraid that a pause might be mistaken for a mistake“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "What is the writer’s attitude towards works made almost entirely of silence?",
+              "options": [
+                "They are worthless and deserve only ridicule.",
+                "They are easy to mock but make a serious point.",
+                "They prove music needs no sound at all.",
+                "They are the only valuable form of music."
+              ],
+              "correct": 1,
+              "explanation": "„easy to mock, yet they make a serious point“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What does the phrase \"the frame around the music\" refer to?",
+              "options": [
+                "The physical instruments used.",
+                "The surrounding conditions and silence that shape our listening.",
+                "The notes printed on a score.",
+                "The applause after a piece."
+              ],
+              "correct": 1,
+              "explanation": "Der Kontext (Stille, Raumklang, Erwartung), der das Hören prägt."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What can be inferred from the final sentence about the relationship between silence and sound?",
+              "options": [
+                "Silence destroys the meaning of a note.",
+                "A note gains its meaning partly from the silence it breaks.",
+                "Sound and silence are unrelated.",
+                "Composers should avoid sound altogether."
+              ],
+              "correct": 1,
+              "explanation": "„a note means little until we have felt the stillness it interrupts“."
+            }
+          ]
+        },
+        {
+          "title": "The Misunderstood Genius of Boredom",
+          "kind": "rc",
+          "text": "Boredom enjoys a poor reputation. We treat it as an enemy to be defeated, reaching instinctively for a phone the moment a queue forms or a conversation stalls. Yet psychologists who study the experience have begun to argue that this restless aversion may be depriving us of something valuable. Boredom, they suggest, is not an empty state but a signal, and one we have grown dangerously skilled at silencing.\n\nThe signal, in essence, tells us that our current situation is failing to engage us and that we should seek something more meaningful. In its healthier form, this prompt can be a spur to creativity. Deprived of external stimulation, the mind tends to turn inward, wandering across half-formed ideas and unexpected connections. Several studies have found that people who first perform a tedious task subsequently generate more imaginative solutions to open-ended problems than those who go straight to the task itself. The dull interval, it seems, primes the imagination.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "What is the main point the writer makes about boredom?",
+              "options": [
+                "It is a harmful state that should always be avoided.",
+                "It can serve a valuable purpose, including stimulating creativity.",
+                "It is impossible to study scientifically.",
+                "It only affects people who use phones."
+              ],
+              "correct": 1,
+              "explanation": "Langeweile als „signal“ und „spur to creativity“."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "How do many people typically respond to boredom, according to the passage?",
+              "options": [
+                "They embrace it as an opportunity.",
+                "They instinctively reach for a phone to escape it.",
+                "They generate creative ideas immediately.",
+                "They seek out tedious tasks."
+              ],
+              "correct": 1,
+              "explanation": "„reaching instinctively for a phone the moment a queue forms“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "What do psychologists say boredom actually is?",
+              "options": [
+                "An empty, meaningless state.",
+                "A signal that our situation is failing to engage us.",
+                "A permanent personality trait.",
+                "A purely physical sensation."
+              ],
+              "correct": 1,
+              "explanation": "„boredom is not an empty state but a signal“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "What did several studies referred to in the passage find?",
+              "options": [
+                "Bored people avoid all tasks.",
+                "Performing a tedious task first led to more imaginative solutions afterwards.",
+                "Creativity decreases after dull activities.",
+                "Phones improve problem-solving."
+              ],
+              "correct": 1,
+              "explanation": "Wer zuerst eine langweilige Aufgabe machte, fand danach „more imaginative solutions“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "What does the phrase \"dangerously skilled at silencing\" imply about modern habits?",
+              "options": [
+                "We are good at ignoring a useful signal, to our detriment.",
+                "We can no longer feel bored at all.",
+                "We deliberately create boredom.",
+                "We have lost the ability to use phones."
+              ],
+              "correct": 0,
+              "explanation": "Wir unterdrücken das nützliche Signal gekonnt, aber zum eigenen Schaden."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "What does \"this prompt\" refer to in the second paragraph?",
+              "options": [
+                "The phone notification.",
+                "The signal telling us to seek something more meaningful.",
+                "The creative solution itself.",
+                "The tedious task."
+              ],
+              "correct": 1,
+              "explanation": "„this prompt“ verweist auf das „signal“."
+            }
+          ]
+        },
+        {
+          "title": "Four People Reflect on Switching Careers",
+          "kind": "mm",
+          "text": "Four professionals describe what it was like to change their line of work.\n\nAnna — I spent twelve years as a corporate lawyer before retraining as a primary school teacher. People warned me I was throwing away financial security, and honestly the pay cut was brutal. Yet I have never once questioned the move. What surprised me most was how much I underestimated the sheer exhaustion of the classroom; nobody prepares you for that. My old colleagues assume I miss the prestige, but the truth is I barely think about it. The children give me a kind of energy that no boardroom ever did.\n\nBen — After being made redundant from engineering, I drifted into running a small bakery almost by accident. I would love to say it was a brave, deliberate leap, but it was pure circumstance. The hardest part has been the finances; I had no idea how thin the margins were, and I nearly closed twice. If I am honest, there are mornings when I wish I had simply found another engineering post instead. Still, I cannot deny the satisfaction of building something that is genuinely mine, even if my bank manager disagrees.\n\nCarla — Moving from nursing into software development was the plan from day one; I studied at night for three years to make it happen. Everyone said my caring background was irrelevant to coding, but they were wrong. The empathy I developed makes me far better at understanding what users actually need. My only frustration is that former colleagues keep treating the switch as a betrayal of a noble calling, as though I had abandoned them. I had not; I simply wanted a future that did not destroy my back by fifty.\n\nDavid — I left journalism to become a carpenter, and the reaction from family was disbelief bordering on alarm. The money is comparable, surprisingly, so finances were never my worry. What I struggled with was the loneliness of working alone in a workshop after years in a buzzing newsroom. I have grown to value the quiet now, though it took a good eighteen months. People expect me to romanticise the change, but I refuse to pretend it was easy. It was the right decision, made for entirely practical reasons about my health.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "Which person changed career as part of a long-held, deliberate plan?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla: „was the plan from day one“, studierte drei Jahre nebenbei."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "Which person admits they sometimes wish they had stayed in their original field?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben: „there are mornings when I wish I had simply found another engineering post“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "Which person found the unexpected isolation of the new job the hardest aspect?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David nennt „the loneliness of working alone in a workshop“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "Which person says the physical tiredness of the new role caught them off guard?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna unterschätzte „the sheer exhaustion of the classroom“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "Which person entered their new field through chance rather than choice?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben: „it was pure circumstance“, „almost by accident“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "Which person resents that ex-colleagues see the move as disloyalty?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla ärgert sich über „a betrayal of a noble calling“."
+            },
+            {
+              "num": 7,
+              "type": "mc",
+              "prompt": "Which person says money was never a concern in making the switch?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David: „finances were never my worry“."
+            }
+          ]
+        },
+        {
+          "title": "Four Accounts of Learning a Foreign Language",
+          "kind": "mm",
+          "text": "Four learners share their experiences of mastering a second language.\n\nAnna — I picked up Italian almost entirely through television and films, never setting foot in a classroom. For years I could understand everything yet froze the moment I had to speak. The breakthrough came when I forced myself to phone Italian shops with silly questions. Grammar still terrifies me; I rely purely on instinct for what sounds right. People praise my accent, which is flattering, but they would be horrified by my written work. For me, fluency was always about the ear, never the page.\n\nBen — Japanese was a deliberate, methodical project for me. I am the sort of person who needs rules, so I devoured textbooks and drilled grammar tables for hours. The writing system, far from intimidating me, was the part I enjoyed most; those characters felt like puzzles. My weakness, embarrassingly, is conversation. Put me in front of a native speaker and my carefully built sentences collapse. I can read a newspaper comfortably, yet ordering a coffee leaves me sweating. I know I must simply talk more, but it frightens me enormously.\n\nCarla — I learned Spanish out of necessity when my company posted me to Madrid with three weeks notice. There was no time for textbooks; I simply had to survive. I made spectacular mistakes daily and learned to laugh at myself, which I think was the real key. What helped most was refusing to retreat into English, even when colleagues offered. My grammar is messy and my spelling worse, but I can hold any conversation now. I never expected to enjoy it, yet the struggle became strangely addictive.\n\nDavid — German came to me through a relationship; my partner is from Hamburg. Learning a language with someone you love is wonderful and maddening in equal measure. They corrected me constantly, which I found humiliating at first, though I am grateful now. Unlike most learners, I started speaking immediately and worried about accuracy later. The real challenge has been the in-laws, who speak a dialect that no textbook covers. I have improved enormously, but I still dread family dinners where everyone talks at once.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "Which person learned the language because of a sudden work relocation?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla wurde „with three weeks notice“ nach Madrid versetzt."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "Which person can read well but struggles badly with speaking?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben liest mühelos, doch „my sentences collapse“ beim Sprechen."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "Which person particularly enjoyed mastering the writing system?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben fand die Schriftzeichen „the part I enjoyed most“."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "Which person learned chiefly by watching screen media?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna lernte „through television and films“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "Which person found their progress hindered by an unfamiliar regional dialect?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David kämpft mit dem Dialekt, „that no textbook covers“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "Which person says being willing to make mistakes was the decisive factor?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla nennt das Lachen über Fehler „the real key“."
+            },
+            {
+              "num": 7,
+              "type": "mc",
+              "prompt": "Which person relies on intuition because formal grammar still scares them?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna: „Grammar still terrifies me“, vertraut auf Instinkt."
+            }
+          ]
+        },
+        {
+          "title": "Four Views on Moving Abroad",
+          "kind": "mm",
+          "text": "Four people describe how they adapted to life in a new country.\n\nAnna — I relocated to Canada chasing a job, fully expecting the language to make it easy. How wrong I was. The shared language lulled me into a false confidence, and the cultural differences blindsided me precisely because I was not braced for them. Small things, like how directly people give feedback, left me reeling for months. What ultimately saved me was a local hiking group; physical activity with others bypassed all my social awkwardness. Three years on, I feel settled, though I still mishear humour constantly.\n\nBen — Japan was always my dream, so I prepared obsessively, studying the etiquette for a full year beforehand. Ironically, that preparation became a burden. I was so anxious about offending anyone that I became stiff and unnatural. The locals, far from expecting perfection, were endlessly patient with foreigners. My biggest regret is the time I wasted worrying. I should have arrived, relaxed, and let myself learn through mistakes. The bureaucracy, I will admit, nearly broke me; the paperwork for residency was a labyrinth I will not soon forget.\n\nCarla — I moved to Portugal purely for the slower pace, and on that front it has delivered beautifully. The difficulty I did not foresee was professional; my qualifications were not recognised, and rebuilding my career from scratch was demoralising. Financially it has been far tighter than I budgeted for. Yet I would not return. The friendships here run deeper than any I had back home, and that human warmth compensates for the empty bank account. I tell anyone considering it to triple their savings estimate before they leap.\n\nDavid — Australia was meant to be temporary, a single gap year that somehow became a decade. I never planned to stay, which perhaps explains why I integrated so easily; I felt no pressure. The thing I miss most, surprisingly, is not family but the changing seasons of home. Endless sunshine sounds idyllic until you crave a grey, drizzly autumn. My advice to newcomers is always the same: do not compare everything to where you came from. That habit poisons the experience faster than anything else.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "Which person was caught out by cultural differences because they shared a common language?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna: die gemeinsame Sprache wiegte sie in „false confidence“."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "Which person found that their professional credentials were not accepted?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla: „my qualifications were not recognised“."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "Which person believes their over-preparation actually hindered their settling in?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben: die Vorbereitung wurde „a burden“, machte ihn steif."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "Which person warns others to budget far more money than they think they need?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla rät, die Ersparnisse zu „triple“."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "Which person settled in easily partly because they never intended to stay?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David: „felt no pressure“ zu bleiben."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "Which person unexpectedly misses the climate of their homeland?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David vermisst „the changing seasons“."
+            },
+            {
+              "num": 7,
+              "type": "mc",
+              "prompt": "Which person overcame social difficulties through a group physical activity?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna wurde durch eine „local hiking group“ gerettet."
+            }
+          ]
+        },
+        {
+          "title": "Four Experiences of Working Remotely",
+          "kind": "mm",
+          "text": "Four employees reflect on the realities of working from home.\n\nAnna — I assumed remote work would hand me back hours of free time, and on paper it did. The cruel irony is that I now work longer than ever, because the boundary between office and home has dissolved entirely. I answer emails at midnight without thinking. What I genuinely treasure, though, is escaping the open-plan office I loathed; the constant noise there had been slowly destroying my concentration for years. I just wish I had set firmer rules from the start about switching off in the evenings.\n\nBen — For me the killer has been isolation. I am an extrovert, and the silence of my flat all day is genuinely depressing. Productivity is not my problem; if anything I get too much done, because there is nothing else to do. I have started working from cafes simply to be near other humans. Management keeps celebrating how much output has risen, oblivious to the loneliness behind those numbers. I would trade a chunk of that productivity for a noisy desk and a colleague to grumble with over coffee.\n\nCarla — Remote work transformed my life because of my children, plain and simple. Being home when they finish school is something I refused to give up, and I fought my employer hard to keep it. The trade-off is that I work in fragments, snatching half an hour here and there between school runs and meals. Colleagues who work in long, uninterrupted blocks cannot grasp how I cope. Honestly, neither can I some days, but the alternative, missing my children growing up, was simply unthinkable to me.\n\nDavid — I was sceptical at first, convinced I lacked the discipline to work without a manager hovering. To my astonishment, I flourished. Removing the two-hour commute alone improved my entire mood and health. The unexpected downside has been career-related; out of sight really does mean out of mind, and I watched a promotion go to a less capable colleague who was visible in the office. That stung. I have since learned to make my contributions loudly known, which feels unnatural but appears to be necessary for survival.",
+          "questions": [
+            {
+              "num": 1,
+              "type": "mc",
+              "prompt": "Which person suffers most from a lack of human contact during the day?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 1,
+              "explanation": "Ben nennt „isolation“ als „the killer“, arbeitet in Cafés."
+            },
+            {
+              "num": 2,
+              "type": "mc",
+              "prompt": "Which person values remote work mainly for time with their family?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla änderte ihr Leben wegen der Kinder."
+            },
+            {
+              "num": 3,
+              "type": "mc",
+              "prompt": "Which person believes remote working damaged their chances of promotion?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David: „out of sight, out of mind“, Beförderung verpasst."
+            },
+            {
+              "num": 4,
+              "type": "mc",
+              "prompt": "Which person was glad to escape a noisy shared workspace?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna hasste das „open-plan office“ und den Lärm."
+            },
+            {
+              "num": 5,
+              "type": "mc",
+              "prompt": "Which person admits they end up working longer hours than before?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 0,
+              "explanation": "Anna: „I now work longer than ever“."
+            },
+            {
+              "num": 6,
+              "type": "mc",
+              "prompt": "Which person had to actively fight their employer to keep the arrangement?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 2,
+              "explanation": "Carla: „fought my employer hard“."
+            },
+            {
+              "num": 7,
+              "type": "mc",
+              "prompt": "Which person was surprised to discover they had enough self-discipline?",
+              "options": [
+                "Anna",
+                "Ben",
+                "Carla",
+                "David"
+              ],
+              "correct": 3,
+              "explanation": "David war skeptisch, „flourished“ aber zu seinem Erstaunen."
+            }
+          ]
+        }
+      ]
     }
   ]
 };
@@ -955,14 +1880,39 @@ function isCorrect(q, answer) {
 /* ---------------- Session ---------------- */
 let session = null;
 
+/* ---------------- Anti-Wiederholung ---------------- */
+let recentPassage = {};      // key -> zuletzt gezeigter Passagen-Titel
+let recentTransforms = [];   // Warteschlange zuletzt genutzter Transformations-Sätze
+
+function pickPassage(c, kind) {
+  let ps = c.passages;
+  let key = c.id;
+  if (kind) { ps = ps.filter(p => p.kind === kind); key = c.id + ':' + kind; }
+  if (ps.length <= 1) { if (ps[0]) recentPassage[key] = ps[0].title; return ps[0]; }
+  const last = recentPassage[key];
+  const pool = ps.filter(p => p.title !== last);
+  const choice = pool[Math.floor(Math.random() * pool.length)];
+  recentPassage[key] = choice.title;
+  return choice;
+}
+function pickTransforms(c, n) {
+  const recentSet = new Set(recentTransforms);
+  const fresh = shuffle(c.pool.filter(t => !recentSet.has(t.original)));
+  const used = shuffle(c.pool.filter(t => recentSet.has(t.original)));
+  const chosen = fresh.concat(used).slice(0, n);
+  chosen.forEach(t => recentTransforms.push(t.original));
+  const cap = Math.max(0, Math.min(c.pool.length - n, 30));
+  while (recentTransforms.length > cap) recentTransforms.shift();
+  return chosen.map((q, i) => Object.assign({}, q, { num: i + 1 }));
+}
+
 function buildSession(catId) {
   const c = cat(catId);
   let passage = null, questions;
   if (c.type === 'transform') {
-    questions = shuffle(c.pool).slice(0, c.sessionLength)
-      .map((q, i) => Object.assign({}, q, { num: i + 1 }));
+    questions = pickTransforms(c, c.sessionLength);
   } else {
-    passage = c.passages[Math.floor(Math.random() * c.passages.length)];
+    passage = pickPassage(c);
     questions = passage.questions;
   }
   session = { cat: c, passage, questions, answers: {}, idx: 0 };
@@ -1018,9 +1968,44 @@ function renderHome() {
         <span class="card-chevron">›</span>
       </button>`;
   }).join('');
-  $('#cards').innerHTML = html;
-  $('#cards').querySelectorAll('.card').forEach(el =>
+
+  // Prüfungssimulation-Karte
+  const es = scores['exam'];
+  let examProgress;
+  if (es) {
+    const best = es.best != null ? es.best : es.pct;
+    const bp = Math.round(best * 100);
+    const passed = best >= PASS_THRESHOLD;
+    const ecls = passed ? 'pass' : 'fail';
+    examProgress = `
+      <span class="card-progress">
+        <span class="cp-bar"><span class="cp-fill ${ecls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
+        <span class="cp-labels"><span class="cp-pct ${ecls}">${bp}%</span><span class="cp-status">${passed ? '✓ Bestanden' : 'Ziel: 60 %'}</span></span>
+      </span>`;
+  } else {
+    examProgress = `
+      <span class="card-progress">
+        <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
+        <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">Noch nicht versucht</span></span>
+      </span>`;
+  }
+  const examCard = `
+    <button class="card card-exam" data-exam="1">
+      <span class="card-icon">EX</span>
+      <span class="card-main">
+        <span class="card-meta">Prüfung · alle Teile</span>
+        <span class="card-name">Prüfungssimulation</span>
+        <span class="card-desc">Kompletter Durchlauf: Part 1–4 plus Reading (Part 5 &amp; 7), mit Gesamtauswertung.</span>
+        ${examProgress}
+      </span>
+      <span class="card-chevron">›</span>
+    </button>`;
+
+  $('#cards').innerHTML = html + examCard;
+  $('#cards').querySelectorAll('.card[data-cat]').forEach(el =>
     el.addEventListener('click', () => startQuiz(el.dataset.cat)));
+  const ec = $('#cards').querySelector('.card[data-exam]');
+  if (ec) ec.addEventListener('click', startExam);
 }
 
 /* ---------------- QUIZ ---------------- */
@@ -1035,6 +2020,10 @@ function renderQuiz() {
   $('#q-cat').textContent = c.shortName;
   $('#q-name').textContent = c.name;
   $('#q-count').textContent = `${session.idx + 1}/${total}`;
+  if (session.exam) {
+    $('#q-cat').textContent = `Prüfung · Teil ${exam.idx + 1}/${exam.stages.length}`;
+    $('#q-name').textContent = session.examLabel;
+  }
 
   // Ticks
   $('#q-ticks').innerHTML = session.questions.map((_, i) =>
@@ -1044,6 +2033,7 @@ function renderQuiz() {
   const pane = $('#passage-pane');
   if (session.passage) {
     pane.style.display = '';
+    pane.classList.toggle('reading', session.cat.type === 'reading');
     $('#passage-title').textContent = session.passage.title;
     $('#passage-text').innerHTML = renderPassage(session.passage, q.num);
   } else {
@@ -1057,12 +2047,23 @@ function renderQuiz() {
   // Nav
   $('#q-prev').textContent = session.idx === 0 ? '✕ Beenden' : '← Zurück';
   const next = $('#q-next');
-  next.textContent = session.idx === total - 1 ? 'Auswerten ✓' : 'Weiter →';
+  const lastQ = session.idx === total - 1;
+  if (session.exam) {
+    const lastStage = exam.idx === exam.stages.length - 1;
+    next.textContent = lastQ ? (lastStage ? 'Auswerten ✓' : 'Nächster Teil →') : 'Weiter →';
+  } else {
+    next.textContent = lastQ ? 'Auswerten ✓' : 'Weiter →';
+  }
   next.disabled = !hasAnswer(q);
 
-  // Scroll zur aktiven Lücke
+  // Scroll: Lückentexte → Frage ins Bild; Reading → oben am Text starten
   if (session.passage) {
     requestAnimationFrame(() => {
+      if (session.cat.type === 'reading') {
+        $('#quiz-body').scrollTop = 0;
+        $('#passage-pane').scrollTop = 0;
+        return;
+      }
       const active = $('#passage-text .gap.active');
       if (active) active.scrollIntoView({ block: 'center', behavior: 'smooth' });
       $('#quiz-body').scrollTop = $('#quiz-body').scrollHeight; // Frage ins Bild
@@ -1075,7 +2076,7 @@ function renderPassage(passage, activeNum) {
   const parts = passage.text.split(/(\{\d+\})/g);
   return parts.map(part => {
     const m = part.match(/^\{(\d+)\}$/);
-    if (!m) return escapeHtml(part);
+    if (!m) return escapeHtml(part).replace(/\n/g, '<br>');
     const num = parseInt(m[1], 10);
     const q = passage.questions.find(x => x.num === num);
     const ans = session.answers[num];
@@ -1104,6 +2105,12 @@ function renderQuestionBody(q) {
         <span class="marker"></span><span class="lett">${letter}</span>
         <span class="txt">${escapeHtml(opt)}</span></button>`;
     }).join('');
+    if (q.prompt) {
+      const kind = session.passage && session.passage.kind === 'mm' ? 'Multiple Matching' : 'Multiple Choice';
+      return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · ${kind}</div>
+        <div class="q-prompt">${escapeHtml(q.prompt)}</div>
+        <div class="options">${opts}</div>`;
+    }
     return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · Multiple-Choice</div>
       <div class="q-prompt">Wähle das beste Wort für Lücke <b>(${n})</b>.</div>
       <div class="options">${opts}</div>`;
@@ -1195,6 +2202,7 @@ function gradeBand(pct) {
 }
 
 function finishQuiz() {
+  if (session.exam) { advanceExam(); return; }
   const qs = session.questions;
   const correct = qs.filter(q => isCorrect(q, session.answers[q.num])).length;
   const total = qs.length;
@@ -1234,12 +2242,108 @@ function renderResults(correct, total, pct, passed) {
   $('#review-list').innerHTML = session.questions.map(q => reviewItem(q)).join('');
 }
 
-function reviewItem(q) {
-  const ans = session.answers[q.num];
+/* ---------------- Prüfungssimulation ---------------- */
+let exam = null;
+let examFinished = false;
+
+function examPlan() {
+  return [
+    { catId: 'part1' }, { catId: 'part2' }, { catId: 'part3' },
+    { catId: 'part4' },
+    { catId: 'reading', kind: 'rc' }, { catId: 'reading', kind: 'mm' }
+  ];
+}
+function buildExamStage(spec) {
+  const c = cat(spec.catId);
+  let passage = null, questions, label;
+  if (c.type === 'transform') {
+    questions = pickTransforms(c, c.sessionLength);
+    label = `${c.shortName} · ${c.name}`;
+  } else if (c.type === 'reading') {
+    passage = pickPassage(c, spec.kind);
+    questions = passage.questions;
+    label = spec.kind === 'mm' ? 'Reading · Multiple Matching' : 'Reading · Multiple Choice';
+  } else {
+    passage = pickPassage(c);
+    questions = passage.questions;
+    label = `${c.shortName} · ${c.name}`;
+  }
+  session = { cat: c, passage, questions, answers: {}, idx: 0, exam: true, examLabel: label };
+}
+function startExam() {
+  exam = { stages: examPlan(), idx: 0, results: [] };
+  examFinished = false;
+  buildExamStage(exam.stages[0]);
+  show('view-quiz');
+  renderQuiz();
+}
+function advanceExam() {
+  const qs = session.questions;
+  const correct = qs.filter(q => isCorrect(q, session.answers[q.num])).length;
+  exam.results.push({ label: session.examLabel, questions: qs, answers: session.answers, correct, total: qs.length });
+  exam.idx++;
+  if (exam.idx < exam.stages.length) {
+    buildExamStage(exam.stages[exam.idx]);
+    renderQuiz();
+    $('#quiz-body').scrollTop = 0;
+  } else {
+    renderExamResults();
+  }
+}
+function renderExamResults() {
+  examFinished = true;
+  const totalCorrect = exam.results.reduce((n, r) => n + r.correct, 0);
+  const totalQ = exam.results.reduce((n, r) => n + r.total, 0);
+  const pct = totalCorrect / totalQ;
+  const passed = pct >= PASS_THRESHOLD;
+  const pctRound = Math.round(pct * 100);
+  const cls = passed ? 'pass' : 'fail';
+  const { grade, verdict } = gradeBand(pct);
+  saveScore('exam', pct, passed);
+
+  $('#r-cat').textContent = 'Prüfungssimulation · Auswertung';
+  $('#r-name').textContent = 'Reading & Use of English';
+
+  const breakdown = exam.results.map(r => {
+    const rp = Math.round(r.correct / r.total * 100);
+    const rcls = (r.correct / r.total) >= PASS_THRESHOLD ? 'pass' : 'fail';
+    return `<div class="exam-row">
+      <span class="exam-row-label">${escapeHtml(r.label)}</span>
+      <span class="exam-row-bar"><span class="exam-row-fill ${rcls}" style="width:${rp}%"></span></span>
+      <span class="exam-row-val ${rcls}">${r.correct}/${r.total}</span>
+    </div>`;
+  }).join('');
+
+  $('#res-hero-inner').innerHTML = `
+    <div class="eyebrow">Prüfungssimulation · Reading &amp; Use of English</div>
+    <h2>Gesamtergebnis</h2>
+    <div class="score-box ${cls}">
+      <span class="score-num">${totalCorrect}/${totalQ}</span>
+      <span class="score-pct">${pctRound}% · Schwelle 60%</span>
+    </div>
+    <div class="passbar-wrap">
+      <div class="passbar"><div class="passbar-fill ${cls}" style="width:${pctRound}%"></div><div class="passbar-mark"></div></div>
+      <div class="passbar-labels"><span>0%</span><span>60% Bestehen</span><span>100%</span></div>
+    </div>
+    <div class="grade-badge ${cls}">${passed ? '✓ Bestanden' : '✗ Nicht bestanden'} · ${escapeHtml(grade)}</div>
+    <div class="verdict">${escapeHtml(verdict)}</div>
+    <div class="exam-breakdown">${breakdown}</div>`;
+
+  $('#review-list').innerHTML = exam.results.map(r =>
+    `<div class="review-part">${escapeHtml(r.label)} · ${r.correct}/${r.total}</div>` +
+    r.questions.map(q => reviewItem(q, r.answers)).join('')
+  ).join('');
+
+  show('view-results');
+  $('.results-scroll').scrollTop = 0;
+}
+
+function reviewItem(q, answers) {
+  const ans = (answers || session.answers)[q.num];
   const ok = isCorrect(q, ans);
   const where = q.type === 'transform'
     ? `Transformation (${q.num}) · ${escapeHtml(q.keyword)}`
-    : `Lücke (${q.num})`;
+    : q.prompt ? `Frage (${q.num})` : `Lücke (${q.num})`;
 
   let correctTxt, yourTxt;
   if (q.type === 'mc') {
@@ -1262,6 +2366,7 @@ function reviewItem(q) {
         <span class="rev-flag ${ok ? 'ok' : 'no'}">${ok ? '✓ Richtig' : '✗ Falsch'}</span>
       </div>
       <div class="rev-where">${where}</div>
+      ${q.prompt ? `<div class="rev-prompt">${escapeHtml(q.prompt)}</div>` : ''}
       ${ansLine}
       <div class="rev-exp">${escapeHtml(q.explanation)}</div>
     </div>`;
@@ -1285,13 +2390,14 @@ $('#q-close').addEventListener('click', () => openModal('quit'));
 $('#modal-cancel').addEventListener('click', closeModal);
 $('#modal-ok').addEventListener('click', () => {
   closeModal();
+  exam = null; examFinished = false;
   renderHome();
   show('view-home');
 });
 
-$('#r-home').addEventListener('click', () => { renderHome(); show('view-home'); });
-$('#r-close').addEventListener('click', () => { renderHome(); show('view-home'); });
-$('#r-retry').addEventListener('click', () => { startQuiz(session.cat.id); });
+$('#r-home').addEventListener('click', () => { exam = null; examFinished = false; renderHome(); show('view-home'); });
+$('#r-close').addEventListener('click', () => { exam = null; examFinished = false; renderHome(); show('view-home'); });
+$('#r-retry').addEventListener('click', () => { if (examFinished) { startExam(); } else { startQuiz(session.cat.id); } });
 
 /* Browser-Back abfangen, damit kein versehentliches Verlassen */
 window.addEventListener('keydown', e => {
