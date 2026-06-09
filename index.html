@@ -236,6 +236,16 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .rev-ans .right{color:var(--correct);font-weight:600;}
 .rev-exp{font-size:14px;color:var(--inkSoft);line-height:1.5;margin-top:4px;}
 .rev-prompt{font-size:14.5px;color:var(--ink);line-height:1.45;margin-bottom:7px;}
+.exam-breakdown{margin:20px auto 0;max-width:460px;display:flex;flex-direction:column;gap:9px;text-align:left;}
+.exam-row{display:flex;align-items:center;gap:11px;}
+.exam-row-label{flex:1;font-size:12.5px;color:var(--inkSoft);min-width:0;}
+.exam-row-bar{flex:none;width:88px;height:7px;background:var(--surface-3);border-radius:99px;overflow:hidden;}
+.exam-row-fill{display:block;height:100%;border-radius:99px;}
+.exam-row-fill.pass{background:var(--correct);} .exam-row-fill.fail{background:var(--accent);}
+.exam-row-val{flex:none;width:44px;text-align:right;font-family:var(--mono);font-size:12px;font-weight:600;}
+.exam-row-val.pass{color:var(--correct);} .exam-row-val.fail{color:var(--accent);}
+.review-part{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:20px 0 2px;padding-top:6px;border-top:1px solid var(--rule);}
+.card-exam .card-icon{background:var(--accent);color:var(--onAccent);border-color:var(--accent);}
 
 /* ---------- modal ---------- */
 .modal-back{position:fixed;inset:0;background:rgba(4,8,13,.66);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;}
@@ -1870,14 +1880,39 @@ function isCorrect(q, answer) {
 /* ---------------- Session ---------------- */
 let session = null;
 
+/* ---------------- Anti-Wiederholung ---------------- */
+let recentPassage = {};      // key -> zuletzt gezeigter Passagen-Titel
+let recentTransforms = [];   // Warteschlange zuletzt genutzter Transformations-Sätze
+
+function pickPassage(c, kind) {
+  let ps = c.passages;
+  let key = c.id;
+  if (kind) { ps = ps.filter(p => p.kind === kind); key = c.id + ':' + kind; }
+  if (ps.length <= 1) { if (ps[0]) recentPassage[key] = ps[0].title; return ps[0]; }
+  const last = recentPassage[key];
+  const pool = ps.filter(p => p.title !== last);
+  const choice = pool[Math.floor(Math.random() * pool.length)];
+  recentPassage[key] = choice.title;
+  return choice;
+}
+function pickTransforms(c, n) {
+  const recentSet = new Set(recentTransforms);
+  const fresh = shuffle(c.pool.filter(t => !recentSet.has(t.original)));
+  const used = shuffle(c.pool.filter(t => recentSet.has(t.original)));
+  const chosen = fresh.concat(used).slice(0, n);
+  chosen.forEach(t => recentTransforms.push(t.original));
+  const cap = Math.max(0, Math.min(c.pool.length - n, 30));
+  while (recentTransforms.length > cap) recentTransforms.shift();
+  return chosen.map((q, i) => Object.assign({}, q, { num: i + 1 }));
+}
+
 function buildSession(catId) {
   const c = cat(catId);
   let passage = null, questions;
   if (c.type === 'transform') {
-    questions = shuffle(c.pool).slice(0, c.sessionLength)
-      .map((q, i) => Object.assign({}, q, { num: i + 1 }));
+    questions = pickTransforms(c, c.sessionLength);
   } else {
-    passage = c.passages[Math.floor(Math.random() * c.passages.length)];
+    passage = pickPassage(c);
     questions = passage.questions;
   }
   session = { cat: c, passage, questions, answers: {}, idx: 0 };
@@ -1933,9 +1968,44 @@ function renderHome() {
         <span class="card-chevron">›</span>
       </button>`;
   }).join('');
-  $('#cards').innerHTML = html;
-  $('#cards').querySelectorAll('.card').forEach(el =>
+
+  // Prüfungssimulation-Karte
+  const es = scores['exam'];
+  let examProgress;
+  if (es) {
+    const best = es.best != null ? es.best : es.pct;
+    const bp = Math.round(best * 100);
+    const passed = best >= PASS_THRESHOLD;
+    const ecls = passed ? 'pass' : 'fail';
+    examProgress = `
+      <span class="card-progress">
+        <span class="cp-bar"><span class="cp-fill ${ecls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
+        <span class="cp-labels"><span class="cp-pct ${ecls}">${bp}%</span><span class="cp-status">${passed ? '✓ Bestanden' : 'Ziel: 60 %'}</span></span>
+      </span>`;
+  } else {
+    examProgress = `
+      <span class="card-progress">
+        <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
+        <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">Noch nicht versucht</span></span>
+      </span>`;
+  }
+  const examCard = `
+    <button class="card card-exam" data-exam="1">
+      <span class="card-icon">EX</span>
+      <span class="card-main">
+        <span class="card-meta">Prüfung · alle Teile</span>
+        <span class="card-name">Prüfungssimulation</span>
+        <span class="card-desc">Kompletter Durchlauf: Part 1–4 plus Reading (Part 5 &amp; 7), mit Gesamtauswertung.</span>
+        ${examProgress}
+      </span>
+      <span class="card-chevron">›</span>
+    </button>`;
+
+  $('#cards').innerHTML = html + examCard;
+  $('#cards').querySelectorAll('.card[data-cat]').forEach(el =>
     el.addEventListener('click', () => startQuiz(el.dataset.cat)));
+  const ec = $('#cards').querySelector('.card[data-exam]');
+  if (ec) ec.addEventListener('click', startExam);
 }
 
 /* ---------------- QUIZ ---------------- */
@@ -1950,6 +2020,10 @@ function renderQuiz() {
   $('#q-cat').textContent = c.shortName;
   $('#q-name').textContent = c.name;
   $('#q-count').textContent = `${session.idx + 1}/${total}`;
+  if (session.exam) {
+    $('#q-cat').textContent = `Prüfung · Teil ${exam.idx + 1}/${exam.stages.length}`;
+    $('#q-name').textContent = session.examLabel;
+  }
 
   // Ticks
   $('#q-ticks').innerHTML = session.questions.map((_, i) =>
@@ -1973,7 +2047,13 @@ function renderQuiz() {
   // Nav
   $('#q-prev').textContent = session.idx === 0 ? '✕ Beenden' : '← Zurück';
   const next = $('#q-next');
-  next.textContent = session.idx === total - 1 ? 'Auswerten ✓' : 'Weiter →';
+  const lastQ = session.idx === total - 1;
+  if (session.exam) {
+    const lastStage = exam.idx === exam.stages.length - 1;
+    next.textContent = lastQ ? (lastStage ? 'Auswerten ✓' : 'Nächster Teil →') : 'Weiter →';
+  } else {
+    next.textContent = lastQ ? 'Auswerten ✓' : 'Weiter →';
+  }
   next.disabled = !hasAnswer(q);
 
   // Scroll: Lückentexte → Frage ins Bild; Reading → oben am Text starten
@@ -2122,6 +2202,7 @@ function gradeBand(pct) {
 }
 
 function finishQuiz() {
+  if (session.exam) { advanceExam(); return; }
   const qs = session.questions;
   const correct = qs.filter(q => isCorrect(q, session.answers[q.num])).length;
   const total = qs.length;
@@ -2161,8 +2242,104 @@ function renderResults(correct, total, pct, passed) {
   $('#review-list').innerHTML = session.questions.map(q => reviewItem(q)).join('');
 }
 
-function reviewItem(q) {
-  const ans = session.answers[q.num];
+/* ---------------- Prüfungssimulation ---------------- */
+let exam = null;
+let examFinished = false;
+
+function examPlan() {
+  return [
+    { catId: 'part1' }, { catId: 'part2' }, { catId: 'part3' },
+    { catId: 'part4' },
+    { catId: 'reading', kind: 'rc' }, { catId: 'reading', kind: 'mm' }
+  ];
+}
+function buildExamStage(spec) {
+  const c = cat(spec.catId);
+  let passage = null, questions, label;
+  if (c.type === 'transform') {
+    questions = pickTransforms(c, c.sessionLength);
+    label = `${c.shortName} · ${c.name}`;
+  } else if (c.type === 'reading') {
+    passage = pickPassage(c, spec.kind);
+    questions = passage.questions;
+    label = spec.kind === 'mm' ? 'Reading · Multiple Matching' : 'Reading · Multiple Choice';
+  } else {
+    passage = pickPassage(c);
+    questions = passage.questions;
+    label = `${c.shortName} · ${c.name}`;
+  }
+  session = { cat: c, passage, questions, answers: {}, idx: 0, exam: true, examLabel: label };
+}
+function startExam() {
+  exam = { stages: examPlan(), idx: 0, results: [] };
+  examFinished = false;
+  buildExamStage(exam.stages[0]);
+  show('view-quiz');
+  renderQuiz();
+}
+function advanceExam() {
+  const qs = session.questions;
+  const correct = qs.filter(q => isCorrect(q, session.answers[q.num])).length;
+  exam.results.push({ label: session.examLabel, questions: qs, answers: session.answers, correct, total: qs.length });
+  exam.idx++;
+  if (exam.idx < exam.stages.length) {
+    buildExamStage(exam.stages[exam.idx]);
+    renderQuiz();
+    $('#quiz-body').scrollTop = 0;
+  } else {
+    renderExamResults();
+  }
+}
+function renderExamResults() {
+  examFinished = true;
+  const totalCorrect = exam.results.reduce((n, r) => n + r.correct, 0);
+  const totalQ = exam.results.reduce((n, r) => n + r.total, 0);
+  const pct = totalCorrect / totalQ;
+  const passed = pct >= PASS_THRESHOLD;
+  const pctRound = Math.round(pct * 100);
+  const cls = passed ? 'pass' : 'fail';
+  const { grade, verdict } = gradeBand(pct);
+  saveScore('exam', pct, passed);
+
+  $('#r-cat').textContent = 'Prüfungssimulation · Auswertung';
+  $('#r-name').textContent = 'Reading & Use of English';
+
+  const breakdown = exam.results.map(r => {
+    const rp = Math.round(r.correct / r.total * 100);
+    const rcls = (r.correct / r.total) >= PASS_THRESHOLD ? 'pass' : 'fail';
+    return `<div class="exam-row">
+      <span class="exam-row-label">${escapeHtml(r.label)}</span>
+      <span class="exam-row-bar"><span class="exam-row-fill ${rcls}" style="width:${rp}%"></span></span>
+      <span class="exam-row-val ${rcls}">${r.correct}/${r.total}</span>
+    </div>`;
+  }).join('');
+
+  $('#res-hero-inner').innerHTML = `
+    <div class="eyebrow">Prüfungssimulation · Reading &amp; Use of English</div>
+    <h2>Gesamtergebnis</h2>
+    <div class="score-box ${cls}">
+      <span class="score-num">${totalCorrect}/${totalQ}</span>
+      <span class="score-pct">${pctRound}% · Schwelle 60%</span>
+    </div>
+    <div class="passbar-wrap">
+      <div class="passbar"><div class="passbar-fill ${cls}" style="width:${pctRound}%"></div><div class="passbar-mark"></div></div>
+      <div class="passbar-labels"><span>0%</span><span>60% Bestehen</span><span>100%</span></div>
+    </div>
+    <div class="grade-badge ${cls}">${passed ? '✓ Bestanden' : '✗ Nicht bestanden'} · ${escapeHtml(grade)}</div>
+    <div class="verdict">${escapeHtml(verdict)}</div>
+    <div class="exam-breakdown">${breakdown}</div>`;
+
+  $('#review-list').innerHTML = exam.results.map(r =>
+    `<div class="review-part">${escapeHtml(r.label)} · ${r.correct}/${r.total}</div>` +
+    r.questions.map(q => reviewItem(q, r.answers)).join('')
+  ).join('');
+
+  show('view-results');
+  $('.results-scroll').scrollTop = 0;
+}
+
+function reviewItem(q, answers) {
+  const ans = (answers || session.answers)[q.num];
   const ok = isCorrect(q, ans);
   const where = q.type === 'transform'
     ? `Transformation (${q.num}) · ${escapeHtml(q.keyword)}`
@@ -2213,13 +2390,14 @@ $('#q-close').addEventListener('click', () => openModal('quit'));
 $('#modal-cancel').addEventListener('click', closeModal);
 $('#modal-ok').addEventListener('click', () => {
   closeModal();
+  exam = null; examFinished = false;
   renderHome();
   show('view-home');
 });
 
-$('#r-home').addEventListener('click', () => { renderHome(); show('view-home'); });
-$('#r-close').addEventListener('click', () => { renderHome(); show('view-home'); });
-$('#r-retry').addEventListener('click', () => { startQuiz(session.cat.id); });
+$('#r-home').addEventListener('click', () => { exam = null; examFinished = false; renderHome(); show('view-home'); });
+$('#r-close').addEventListener('click', () => { exam = null; examFinished = false; renderHome(); show('view-home'); });
+$('#r-retry').addEventListener('click', () => { if (examFinished) { startExam(); } else { startQuiz(session.cat.id); } });
 
 /* Browser-Back abfangen, damit kein versehentliches Verlassen */
 window.addEventListener('keydown', e => {
