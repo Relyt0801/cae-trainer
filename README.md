@@ -17,9 +17,10 @@ Lösungsbegründungen und gespeichertem Fortschritt (localStorage).
 
 ## Design
 
-Modernes, schlichtes Corporate-Design (System-Schriftarten, keine externen
-Abhängigkeiten — funktioniert komplett offline). Die Benutzeroberfläche ist
-auf Deutsch, die Übungsinhalte auf Englisch.
+Modernes, schlichtes Corporate-Design im **Dark Mode** (System-Schriftarten,
+keine externen Abhängigkeiten — funktioniert komplett offline). Vollständig
+**responsive**: einspaltig auf dem Handy, zweispaltiges Raster ab Tablet/Desktop.
+Die Benutzeroberfläche ist auf Deutsch, die Übungsinhalte auf Englisch.
 
 ## Installation auf dem Handy
 
