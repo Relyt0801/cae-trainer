@@ -315,6 +315,75 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .modal-actions{display:flex;gap:11px;}
 .modal-actions .nav-btn{flex:1;}
 
+/* ---------- header menu button ---------- */
+.home-toprow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+.hdr-btn{flex:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  color:var(--inkSoft);background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:var(--rsm);
+  transition:background .15s ease,border-color .15s ease,color .15s ease;}
+.hdr-btn:hover{color:var(--ink);border-color:var(--ruleStrong);background:var(--surface);}
+.hdr-btn:active{transform:translateY(1px);}
+.hdr-btn svg{width:21px;height:21px;}
+
+/* ---------- compact mode ---------- */
+.compact .cards{gap:18px;}
+.compact .sec-grid{grid-template-columns:1fr 1fr;gap:11px;}
+.compact .card{flex-direction:column;align-items:flex-start;gap:11px;padding:14px;border-radius:var(--rsm);}
+.compact .card-icon{width:38px;height:38px;border-radius:8px;}
+.compact .card-icon svg{width:20px;height:20px;}
+.compact .card-desc{display:none;}
+.compact .card-chevron{display:none;}
+.compact .card-name{font-size:15px;margin:3px 0 0;}
+.compact .card-meta{font-size:9.5px;}
+.compact .card-progress{margin-top:10px;width:100%;}
+.compact .cp-mark,.compact .cp-mark::after{display:none;}
+.compact .cp-status{display:none;}
+.compact .cp-labels{margin-top:7px;}
+.compact .card:hover{transform:translateY(-2px);}
+@media (max-width:360px){ .compact .sec-grid{grid-template-columns:1fr;} }
+
+/* ---------- settings ---------- */
+.settings-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.settings-scroll .wrap{padding-top:22px;padding-bottom:calc(34px + env(safe-area-inset-bottom));}
+.set-group{margin-bottom:26px;}
+.set-group-title{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--inkFaint);margin-bottom:12px;}
+.set-row{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:16px 17px;box-shadow:var(--sh);}
+.set-row + .set-row{margin-top:11px;}
+.set-row-main{flex:1;min-width:0;}
+.set-row-name{font-size:15.5px;font-weight:650;color:var(--ink);}
+.set-row-desc{font-size:13px;color:var(--inkSoft);line-height:1.45;margin-top:3px;}
+
+/* toggle switch */
+.switch{flex:none;position:relative;width:50px;height:30px;border-radius:99px;background:var(--surface-3);
+  border:1px solid var(--ruleStrong);cursor:pointer;transition:background .18s ease,border-color .18s ease;}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+  background:var(--inkSoft);transition:transform .2s cubic-bezier(.2,.7,.2,1),background .18s ease;}
+.switch.on{background:var(--accentSoft);border-color:var(--accent);}
+.switch.on::after{transform:translateX(20px);background:var(--accent);}
+
+.set-reset{width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--sans);font-size:14px;font-weight:650;color:var(--wrong);
+  background:var(--wrongBg);border:1px solid var(--wrongBd);border-radius:var(--rsm);}
+.set-reset:active{transform:translateY(1px);}
+.set-reset svg{width:17px;height:17px;}
+
+/* per-mode history charts */
+.charts{display:flex;flex-direction:column;gap:13px;}
+.chart-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:15px 16px 12px;box-shadow:var(--sh);}
+.chart-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px;}
+.chart-name{font-size:14.5px;font-weight:650;color:var(--ink);}
+.chart-stat{font-family:var(--mono);font-size:12px;font-weight:600;}
+.chart-stat.pass{color:var(--correct);} .chart-stat.fail{color:var(--accent);} .chart-stat.none{color:var(--inkFaint);}
+.chart-sub{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--inkFaint);margin-bottom:8px;}
+.chart-svg{width:100%;height:auto;display:block;overflow:visible;}
+.chart-empty{font-size:13px;color:var(--inkFaint);font-style:normal;padding:14px 0 6px;}
+.ch-grid{stroke:var(--rule);stroke-width:1;}
+.ch-thresh{stroke:var(--ruleStrong);stroke-width:1;stroke-dasharray:3 3;}
+.ch-line{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+.ch-dot{stroke:var(--surface);stroke-width:1.6;}
+.ch-dot-last{stroke:var(--surface);stroke-width:2;}
+.ch-thresh-lab{fill:var(--inkFaint);font-family:var(--mono);font-size:7px;letter-spacing:.06em;}
+@media (min-width:720px){ .charts{display:grid;grid-template-columns:1fr 1fr;gap:13px;} }
+
 /* ---------- responsive ---------- */
 @media (max-width:419px){
   .hero-ring{width:82px;height:82px;}
@@ -367,9 +436,14 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
       <header class="home-header">
         <div class="hero-art" aria-hidden="true"></div>
         <div class="wrap">
+          <div class="home-toprow">
+            <div class="eyebrow">Cambridge C1 Advanced</div>
+            <button class="hdr-btn" id="open-settings" aria-label="Menü &amp; Einstellungen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            </button>
+          </div>
           <div class="home-hero">
             <div class="hero-text">
-              <div class="eyebrow">Cambridge C1 Advanced</div>
               <h1 class="home-title">Reading &amp; <em>Use of English</em></h1>
               <p class="home-sub">Übungs-Trainer · Bestehen ab 60&nbsp;%</p>
             </div>
@@ -450,6 +524,24 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
       <button class="nav-btn" id="r-home">Zur Übersicht</button>
       <button class="nav-btn primary" id="r-retry">Wiederholen ↻</button>
     </nav>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section id="view-settings" class="view">
+    <div class="topbar">
+      <div class="wrap">
+        <div class="topbar-row">
+          <button class="icon-btn" id="set-close" aria-label="Zurück">×</button>
+          <div class="topbar-titles">
+            <div class="row1"><span class="topbar-cat">Menü</span></div>
+            <div class="topbar-name">Einstellungen &amp; Verlauf</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="settings-scroll">
+      <div class="wrap" id="settings-inner"></div>
+    </div>
   </section>
 
   <!-- ============ MODAL ============ -->
@@ -1905,6 +1997,7 @@ const DATA = {
 
 const PASS_THRESHOLD = 0.6;
 const STORE_KEY = 'cae_trainer_scores_v1';
+const COMPACT_KEY = 'cae_trainer_compact';
 
 /* ---------------- Persistenz ---------------- */
 function loadScores() {
@@ -1916,8 +2009,22 @@ function saveScore(catId, pct, passed) {
   const prev = all[catId] || {};
   const prevBest = prev.best != null ? prev.best : (prev.pct || 0);
   const best = Math.max(prevBest, pct);
-  all[catId] = { pct, passed, when: Date.now(), best, attempts: (prev.attempts || 0) + 1 };
+  const history = (Array.isArray(prev.history) ? prev.history : []).concat([{ p: pct, t: Date.now() }]);
+  while (history.length > 40) history.shift();
+  all[catId] = { pct, passed, when: Date.now(), best, attempts: (prev.attempts || 0) + 1, history };
   try { localStorage.setItem(STORE_KEY, JSON.stringify(all)); } catch (_) {}
+}
+function resetScores() {
+  try { localStorage.removeItem(STORE_KEY); } catch (_) {}
+}
+function loadCompact() {
+  try { return localStorage.getItem(COMPACT_KEY) === '1'; } catch (_) { return false; }
+}
+function saveCompact(on) {
+  try { localStorage.setItem(COMPACT_KEY, on ? '1' : '0'); } catch (_) {}
+}
+function applyCompact() {
+  document.getElementById('app').classList.toggle('compact', loadCompact());
 }
 
 /* ---------------- Helpers ---------------- */
@@ -2061,7 +2168,7 @@ function categoryCard(c, scores, delay) {
     <button class="card card-in" style="animation-delay:${delay}ms" data-cat="${c.id}">
       <span class="card-icon">${ICONS[c.id] || escapeHtml(c.icon)}</span>
       <span class="card-main">
-        <span class="card-meta">${escapeHtml(c.shortName)} · ${c.sessionLength} Q · Pool ${poolSize(c)}</span>
+        <span class="card-meta">${escapeHtml(c.shortName)}</span>
         <span class="card-name">${escapeHtml(c.name)}</span>
         <span class="card-desc">${escapeHtml(c.description)}</span>
         ${progressHtml(scores[c.id], 'Noch nicht geübt')}
@@ -2075,17 +2182,14 @@ function renderHome() {
   const useOfEnglish = DATA.categories.filter(c => c.id.startsWith('part'));
   const readingCats = DATA.categories.filter(c => c.type === 'reading');
 
-  // Hero: Ring (Ø Bestwert über alle 6 Modi) + Chips
+  // Hero: Ring (Ø Bestwert über alle 6 Modi) + Sessions-Chip
   const allIds = DATA.categories.map(c => c.id).concat(['exam']);
   const avg = allIds.reduce((n, id) => n + bestOf(scores[id]), 0) / allIds.length;
-  const passedCount = allIds.filter(id => bestOf(scores[id]) >= PASS_THRESHOLD).length;
-  const totalPool = DATA.categories.reduce((n, c) => n + poolSize(c), 0);
   const attempts = allIds.reduce((n, id) => n + (scores[id] ? (scores[id].attempts || 0) : 0), 0);
   $('#hero-ring').innerHTML = ringSvg(avg);
-  $('#hero-chips').innerHTML = `
-    <span class="chip ${passedCount === allIds.length && attempts > 0 ? 'ok' : ''}">${ICON_CHECK}<b>${passedCount}/${allIds.length}</b>&nbsp;bestanden</span>
-    <span class="chip">${ICON_STACK}<b>${totalPool}</b>&nbsp;Fragen im Pool</span>
-    <span class="chip">${ICON_LOOP}<b>${attempts}</b>&nbsp;Sessions</span>`;
+  $('#hero-chips').innerHTML = attempts > 0
+    ? `<span class="chip">${ICON_LOOP}<b>${attempts}</b>&nbsp;${attempts === 1 ? 'Session' : 'Sessions'} absolviert</span>`
+    : '';
 
   let d = 0;
   const next = () => { d += 40; return d; };
@@ -2111,7 +2215,7 @@ function renderHome() {
       <button class="card card-exam card-in" style="animation-delay:${next()}ms" data-exam="1">
         <span class="card-icon">${ICONS.exam}</span>
         <span class="card-main">
-          <span class="card-meta">Prüfung · alle Teile · 43 Q</span>
+          <span class="card-meta">Prüfung · alle Teile</span>
           <span class="card-name">Prüfungssimulation</span>
           <span class="card-desc">Kompletter Durchlauf: Part 1–4 plus Reading (Part 5 &amp; 7), mit Gesamtauswertung.</span>
           ${progressHtml(scores['exam'], 'Noch nicht versucht')}
@@ -2126,6 +2230,105 @@ function renderHome() {
   const ec = $('#cards').querySelector('.card[data-exam]');
   if (ec) ec.addEventListener('click', startExam);
 }
+
+/* ---------------- SETTINGS & VERLAUF ---------------- */
+const ICON_TRASH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>';
+
+function lineChart(history, gid) {
+  const W = 300, H = 96, padX = 10, padTop = 12, padBot = 16;
+  const pts = history.map(h => Math.min(1, Math.max(0, h.p)));
+  if (!pts.length) return `<div class="chart-empty">Noch keine Versuche — starte den Modus, um deinen Verlauf zu sehen.</div>`;
+  const n = pts.length;
+  const x = i => n === 1 ? W / 2 : padX + (W - 2 * padX) * (i / (n - 1));
+  const y = v => padTop + (H - padTop - padBot) * (1 - v);
+  const last = pts[n - 1];
+  const col = last >= PASS_THRESHOLD ? 'var(--correct)' : 'var(--accent)';
+  const yThresh = y(PASS_THRESHOLD);
+
+  const linePts = pts.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  const area = `M ${x(0).toFixed(1)} ${(H - padBot).toFixed(1)} L ` +
+    pts.map((v, i) => `${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' L ') +
+    ` L ${x(n - 1).toFixed(1)} ${(H - padBot).toFixed(1)} Z`;
+
+  const dots = pts.map((v, i) => {
+    const lastDot = i === n - 1;
+    return `<circle class="${lastDot ? 'ch-dot-last' : 'ch-dot'}" cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${lastDot ? 4.2 : 2.8}" fill="${lastDot ? col : 'var(--accent)'}"/>`;
+  }).join('');
+
+  const grid = [0.25, 0.5, 0.75, 1].map(g => `<line class="ch-grid" x1="${padX}" y1="${y(g).toFixed(1)}" x2="${W - padX}" y2="${y(g).toFixed(1)}"/>`).join('');
+
+  return `<svg class="chart-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img">
+    <defs><linearGradient id="cg${gid}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${col}" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="${col}" stop-opacity="0"/>
+    </linearGradient></defs>
+    ${grid}
+    <line class="ch-thresh" x1="${padX}" y1="${yThresh.toFixed(1)}" x2="${W - padX}" y2="${yThresh.toFixed(1)}"/>
+    <text class="ch-thresh-lab" x="${W - padX}" y="${(yThresh - 3).toFixed(1)}" text-anchor="end">60 %</text>
+    <path d="${area}" fill="url(#cg${gid})"/>
+    <polyline class="ch-line" points="${linePts}" style="stroke:${col}"/>
+    ${dots}
+  </svg>`;
+}
+
+function renderSettings() {
+  const scores = loadScores();
+  const compact = loadCompact();
+  const modes = DATA.categories.map(c => ({ id: c.id, name: c.name, short: c.shortName }))
+    .concat([{ id: 'exam', name: 'Prüfungssimulation', short: 'Prüfung' }]);
+
+  const charts = modes.map((m, i) => {
+    const s = scores[m.id];
+    const hist = s && Array.isArray(s.history) ? s.history : [];
+    const last = hist.length ? hist[hist.length - 1].p : null;
+    const statCls = last == null ? 'none' : (last >= PASS_THRESHOLD ? 'pass' : 'fail');
+    const statTxt = last == null ? '—' : `${Math.round(last * 100)}%`;
+    const sub = hist.length ? `${hist.length} ${hist.length === 1 ? 'Versuch' : 'Versuche'} · Bestwert ${Math.round(bestOf(s) * 100)}%` : 'Noch kein Versuch';
+    return `<div class="chart-card">
+      <div class="chart-top"><span class="chart-name">${escapeHtml(m.name)}</span><span class="chart-stat ${statCls}">${statTxt}</span></div>
+      <div class="chart-sub">${sub}</div>
+      ${lineChart(hist, i)}
+    </div>`;
+  }).join('');
+
+  $('#settings-inner').innerHTML = `
+    <div class="set-group">
+      <div class="set-group-title">Darstellung</div>
+      <div class="set-row">
+        <div class="set-row-main">
+          <div class="set-row-name">Kompaktes Design</div>
+          <div class="set-row-desc">Modi enger und übersichtlicher als kompakte Kacheln anordnen.</div>
+        </div>
+        <button class="switch ${compact ? 'on' : ''}" id="toggle-compact" role="switch" aria-checked="${compact}" aria-label="Kompaktes Design"></button>
+      </div>
+    </div>
+
+    <div class="set-group">
+      <div class="set-group-title">Verlauf je Modus</div>
+      <div class="charts">${charts}</div>
+    </div>
+
+    <div class="set-group">
+      <div class="set-group-title">Daten</div>
+      <button class="set-reset" id="do-reset">${ICON_TRASH} Fortschritt zurücksetzen</button>
+    </div>`;
+
+  $('#toggle-compact').addEventListener('click', () => {
+    const on = !loadCompact();
+    saveCompact(on);
+    applyCompact();
+    $('#toggle-compact').classList.toggle('on', on);
+    $('#toggle-compact').setAttribute('aria-checked', String(on));
+  });
+  $('#do-reset').addEventListener('click', () => openConfirm({
+    title: 'Fortschritt zurücksetzen?',
+    text: 'Alle gespeicherten Ergebnisse und Verläufe werden unwiderruflich gelöscht.',
+    okLabel: 'Zurücksetzen', cancelLabel: 'Abbrechen',
+    onOk: () => { resetScores(); renderSettings(); }
+  }));
+}
+
+function openSettings() { renderSettings(); show('view-settings'); $('.settings-scroll').scrollTop = 0; }
 
 /* ---------------- QUIZ ---------------- */
 function startQuiz(catId) {
@@ -2493,21 +2696,36 @@ function reviewItem(q, answers) {
 
 /* ---------------- Modal ---------------- */
 let modalAction = null;
+let pendingConfirm = null;
 function openModal(kind) {
-  modalAction = kind;
+  modalAction = kind; pendingConfirm = null;
   $('#modal-title').textContent = 'Test abbrechen?';
   $('#modal-text').textContent = 'Dein bisheriger Fortschritt in dieser Session geht verloren.';
+  $('#modal-cancel').textContent = 'Weiter üben';
+  $('#modal-ok').textContent = 'Abbrechen';
   $('#modal').classList.add('show');
 }
-function closeModal() { $('#modal').classList.remove('show'); modalAction = null; }
+function openConfirm(cfg) {
+  modalAction = null; pendingConfirm = cfg.onOk || null;
+  $('#modal-title').textContent = cfg.title;
+  $('#modal-text').textContent = cfg.text;
+  $('#modal-cancel').textContent = cfg.cancelLabel || 'Abbrechen';
+  $('#modal-ok').textContent = cfg.okLabel || 'OK';
+  $('#modal').classList.add('show');
+}
+function closeModal() { $('#modal').classList.remove('show'); modalAction = null; pendingConfirm = null; }
 
 /* ---------------- Events ---------------- */
 $('#q-next').addEventListener('click', goNext);
 $('#q-prev').addEventListener('click', goPrev);
 $('#q-close').addEventListener('click', () => openModal('quit'));
 
+$('#open-settings').addEventListener('click', openSettings);
+$('#set-close').addEventListener('click', () => { renderHome(); show('view-home'); });
+
 $('#modal-cancel').addEventListener('click', closeModal);
 $('#modal-ok').addEventListener('click', () => {
+  if (pendingConfirm) { const cb = pendingConfirm; closeModal(); cb(); return; }
   closeModal();
   exam = null; examFinished = false;
   renderHome();
@@ -2570,6 +2788,7 @@ if (!isStandalone() && isiOS()) {
 if (isStandalone()) installArea.hidden = true;
 
 /* ---------------- Init ---------------- */
+applyCompact();
 renderHome();
 
 </script>
