@@ -1,9 +1,15 @@
 # CAE Trainer — C1 Advanced
 
 Übungs-Trainer für **Cambridge C1 Advanced — Reading & Use of English**.
-Eine eigenständige, offline-fähige Progressive Web App (PWA) in einer
-einzigen `index.html` — keine Web-Verknüpfung, sondern eine echte
-installierbare App.
+
+Zwei Varianten:
+
+- **Web / PWA** — eigenständige, offline-fähige App in einer einzigen
+  `index.html` (siehe unten).
+- **Native App (Flutter)** — echte Android-/iOS-App im Ordner [`app/`](app/).
+  Per Konsole bauen (`bash app/setup.sh && cd app && flutter run`) oder in
+  Android Studio öffnen. Eine fertige APK baut der GitHub-Actions-Workflow
+  `flutter-apk.yml` automatisch. Details: [`app/README.md`](app/README.md).
 
 ## Inhalt
 
