@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1A1612" />
+<meta name="description" content="Cambridge C1 Advanced — Reading & Use of English Übungs-Trainer" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAACHklEQVR42u3asQ2AMAxFwcxAQeFRsw6DMEFahqDNALBEkLB1xVvAuurLLfbtkarUHEFAS0BLQEtAC2gJaAloCWgJaAEtAS0BLQEtAS2gJaAloCWgJaAFtAS0BLQEtAS0gJaAloCWsoPuESoU0BAADbSABlpAAy2ggQYaaAENtIAGWkADLaCBBhpoAQ20gAZaQAMtoIEGGmgBDbSABlpAAy2ggQYaaAENtIAGWkCvad6XCgU0BEADLaCBFtBAC2iggQZaQAMtoIEW0EALaKCBBlpAAy2ggRbQQAtooIEGWkADLaCBFtBAC2iggQZaQAMtoIEW0EAL6E9Aj/PQgoAGGmiggQYaaKCBBlpAAw000EADDbQd2g4NtIAGWkADLaCBFtAQAA20gAZaQAMtoIEGGmgBDbRfDr8cQAtooIEGGmiggQYaaKBhBBpoAW2HFtBAAw20gAZaQAMtoIEW0EADDbSABlpAAy2ggRbQfjn8cgANNNBAC2iggQYaaKCBBhpooIEG2g4tOzTQAhpoAQ000EALaKAFNNACGmiggRbQQAtooAW0X47cvxVAAw000EADDTTQQAMNNNBAAw000EADbYe2QwMNAdBAC2igBTTQAhpooIEW0EALaKAFNNACGmiggRbQqUFLQEtAC2gJaAloCWgJaAEtAS0BLQEtAS2gJaAloCWgJaAFtAS0BLQEtICWgJaAloCWgBbQEtDSn3oB6jOHzgeFMeQAAAAASUVORK5CYII=" />
+<link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%20%20%3Crect%20width%3D%22512%22%20height%3D%22512%22%20fill%3D%22%231A1612%22%2F%3E%0A%20%20%3Crect%20x%3D%2244%22%20y%3D%2244%22%20width%3D%22424%22%20height%3D%22424%22%20fill%3D%22none%22%20stroke%3D%22%237A1A1A%22%20stroke-width%3D%226%22%2F%3E%0A%20%20%3Ctext%20x%3D%22256%22%20y%3D%22232%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2C%20'Cormorant%20Garamond'%2C%20serif%22%20font-size%3D%22190%22%20font-weight%3D%22600%22%20fill%3D%22%23F3EAD6%22%3ECAE%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22256%22%20y%3D%22360%22%20text-anchor%3D%22middle%22%20font-family%3D%22'JetBrains%20Mono'%2C%20monospace%22%20font-size%3D%2258%22%20letter-spacing%3D%2210%22%20fill%3D%22%23CDBFA3%22%3EC1%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A" type="image/svg+xml" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="CAE Trainer" />
+<title>CAE Trainer — C1 Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#F3EAD6; --paperWarm:#ECE1C7; --paperDeep:#E3D6B3;
+  --ink:#1A1612; --inkSoft:#4A4036; --inkFaint:#8A7C6C;
+  --rule:#CDBFA3; --accent:#7A1A1A;
+  --correct:#2F5D2A; --correctBg:#D9E4CF;
+  --wrong:#8B1A1A; --wrongBg:#ECD6D6;
+  --highlight:#F5D76E;
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --body:'Lora', Georgia, serif;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --pad:22px;
+  --maxw:720px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+/* ---------- layout shell ---------- */
+#app{min-height:100%;display:flex;flex-direction:column;}
+.view{flex:1;display:none;flex-direction:column;min-height:0;}
+.view.active{display:flex;}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+/* ---------- eyebrow / mono labels ---------- */
+.eyebrow{font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--inkFaint);}
+.mono{font-family:var(--mono);letter-spacing:.15em;}
+
+/* ---------- HOME ---------- */
+.home-scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
+.home-header{
+  padding-top:calc(34px + env(safe-area-inset-top));
+  padding-bottom:24px;
+  background-image:repeating-linear-gradient(180deg,transparent 0,transparent 27px,rgba(122,26,26,.025) 27px,rgba(122,26,26,.025) 28px);
+  border-bottom:1px solid var(--rule);
+}
+.home-header .eyebrow{margin-bottom:10px;}
+.home-title{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.05;letter-spacing:-.01em;margin:0;}
+.home-title em{font-style:italic;font-weight:500;color:var(--accent);}
+.home-sub{font-style:italic;color:var(--inkSoft);margin-top:10px;font-size:15px;}
+.cards{padding-top:18px;padding-bottom:calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px;}
+.card{
+  display:flex;gap:16px;align-items:flex-start;text-align:left;width:100%;
+  background:var(--paperWarm);border:1px solid var(--rule);padding:16px;
+  transition:border-color .15s ease, transform .05s ease;
+}
+.card:active{transform:translateY(1px);}
+.card:hover{border-color:var(--ink);}
+.card-icon{flex:none;width:48px;height:48px;background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;letter-spacing:.06em;}
+.card-main{flex:1;min-width:0;}
+.card-meta,.card-name,.card-desc,.card-progress{display:block;}
+.card-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--inkFaint);}
+.card-name{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.15;margin:3px 0 4px;}
+.card-desc{font-size:14px;color:var(--inkSoft);line-height:1.4;}
+.card-chevron{flex:none;align-self:center;font-size:22px;color:var(--inkFaint);}
+
+/* card progress (Führerschein-Stil: Balken + 60%-Marke) */
+.card-progress{margin-top:18px;}
+.cp-bar{display:block;position:relative;height:12px;background:var(--paperDeep);border:1px solid var(--rule);overflow:visible;}
+.cp-fill{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .5s ease;}
+.cp-fill.pass{background:var(--correct);}
+.cp-fill.fail{background:var(--wrong);}
+.cp-fill.none{background:transparent;}
+.cp-mark{position:absolute;top:-3px;bottom:-3px;left:60%;width:2px;background:var(--ink);}
+.cp-mark::after{content:"60";position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--ink);}
+.cp-labels{display:flex;justify-content:space-between;align-items:baseline;margin-top:9px;}
+.cp-pct{font-family:var(--mono);font-size:13px;letter-spacing:.06em;}
+.cp-pct.pass{color:var(--correct);} .cp-pct.fail{color:var(--wrong);} .cp-pct.none{color:var(--inkFaint);}
+.cp-status{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--inkFaint);}
+
+/* install */
+.install-area{margin-top:18px;}
+.install-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);}
+.install-btn:active{transform:translateY(1px);}
+.install-hint{margin-top:10px;font-size:13.5px;line-height:1.5;color:var(--inkSoft);
+  background:var(--paperWarm);border:1px solid var(--rule);border-left:3px solid var(--accent);padding:11px 13px;}
+.install-hint b{color:var(--ink);}
+
+/* ---------- topbar (quiz/results) ---------- */
+.topbar{
+  padding-top:calc(12px + env(safe-area-inset-top));padding-bottom:12px;
+  border-bottom:1px solid var(--rule);background:var(--paper);
+  background-image:repeating-linear-gradient(180deg,transparent 0,transparent 27px,rgba(122,26,26,.025) 27px,rgba(122,26,26,.025) 28px);
+}
+.topbar-row{display:flex;align-items:flex-start;gap:14px;}
+.icon-btn{flex:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  font-size:24px;line-height:1;color:var(--inkSoft);border:1px solid var(--rule);background:var(--paperWarm);}
+.icon-btn:active{background:var(--paperDeep);}
+.topbar-titles{flex:1;min-width:0;}
+.topbar-titles .row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.topbar-cat{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);}
+.topbar-count{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--inkSoft);}
+.topbar-name{font-family:var(--serif);font-weight:600;font-size:18px;line-height:1.1;margin-top:1px;}
+.ticks{display:flex;gap:4px;margin-top:11px;}
+.tick{flex:1;height:4px;background:var(--paperDeep);}
+.tick.done{background:var(--inkFaint);}
+.tick.cur{background:var(--accent);}
+
+/* ---------- quiz body ---------- */
+.quiz-body{flex:1;display:flex;flex-direction:column;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.passage-pane{
+  background:var(--paperWarm);border-bottom:1px solid var(--rule);
+  max-height:32vh;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:none;
+}
+.passage-pane .wrap{padding-top:16px;padding-bottom:18px;}
+.passage-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--inkFaint);margin-bottom:10px;}
+.passage-text{font-size:16px;line-height:1.85;color:var(--inkSoft);}
+.gap{font-family:var(--mono);font-size:.82em;letter-spacing:.04em;padding:1px 7px;border:1px solid var(--rule);
+  background:var(--paperDeep);color:var(--inkSoft);white-space:nowrap;border-radius:0;}
+.gap.answered{background:var(--correctBg);border-color:#A9C29C;color:var(--correct);}
+.gap.active{background:var(--highlight);border-color:#D9B84A;color:var(--ink);
+  animation:glow 1.6s ease-in-out infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(245,215,110,.0);}50%{box-shadow:0 0 0 4px rgba(245,215,110,.45);}}
+
+.qbody{flex:1;}
+.qbody .wrap{padding-top:18px;padding-bottom:22px;}
+.q-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--inkFaint);margin-bottom:12px;}
+.q-prompt{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.2;margin-bottom:18px;}
+.q-prompt b{color:var(--accent);font-style:italic;font-weight:600;}
+
+/* MC options */
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{display:flex;align-items:center;gap:13px;text-align:left;width:100%;
+  background:var(--paperWarm);border:1px solid var(--rule);padding:14px 15px;min-height:52px;
+  transition:border-color .12s ease,background .12s ease;}
+.option:hover{border-color:var(--inkFaint);}
+.option.sel{border-color:var(--ink);background:var(--paperDeep);}
+.option .marker{flex:none;width:22px;height:22px;border:1.5px solid var(--inkFaint);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;}
+.option.sel .marker{border-color:var(--ink);}
+.option.sel .marker::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink);}
+.option .lett{font-family:var(--mono);font-size:13px;color:var(--inkFaint);min-width:14px;}
+.option.sel .lett{color:var(--ink);}
+.option .txt{font-size:17px;}
+
+/* text input area */
+.hint{font-size:13px;color:var(--inkFaint);font-style:italic;margin-bottom:12px;}
+.basework{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.base-tag{font-family:var(--mono);font-size:13px;letter-spacing:.12em;background:var(--ink);color:var(--paper);padding:7px 12px;}
+.arrow{font-size:20px;color:var(--inkFaint);}
+.answer-input{width:100%;font-family:var(--body);font-size:18px;color:var(--ink);
+  background:var(--paperWarm);border:1px solid var(--rule);border-bottom:2px solid var(--inkFaint);
+  padding:13px 14px;border-radius:0;}
+.answer-input:focus{outline:none;border-bottom-color:var(--accent);background:#fff8ea;}
+.answer-input::placeholder{color:var(--inkFaint);}
+
+/* transformation block */
+.tblock{display:flex;flex-direction:column;gap:14px;margin-bottom:16px;}
+.tline{font-size:16px;line-height:1.5;}
+.tlabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--inkFaint);display:block;margin-bottom:4px;}
+.torig{color:var(--inkSoft);}
+.tkey{font-family:var(--mono);font-size:14px;letter-spacing:.14em;background:var(--ink);color:var(--paper);padding:7px 13px;display:inline-block;}
+.tgapped{font-size:17px;line-height:1.6;color:var(--ink);}
+.tgap-mark{font-family:var(--mono);font-size:.78em;letter-spacing:.05em;background:var(--highlight);border:1px solid #D9B84A;padding:1px 8px;color:var(--ink);white-space:nowrap;}
+
+/* ---------- navbar ---------- */
+.navbar{display:flex;gap:12px;border-top:1px solid var(--rule);background:var(--paper);
+  padding:14px var(--pad) calc(14px + env(safe-area-inset-bottom));}
+.nav-btn{flex:1;min-height:50px;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--ink);background:var(--paperWarm);}
+.nav-btn:active{transform:translateY(1px);}
+.nav-btn.primary{background:var(--ink);color:var(--paper);}
+.nav-btn.primary:disabled,.nav-btn:disabled{opacity:.34;cursor:not-allowed;background:var(--paperWarm);color:var(--inkFaint);border-color:var(--rule);transform:none;}
+.nav-btn.primary:disabled{background:var(--paperWarm);}
+
+/* ---------- RESULTS ---------- */
+.results-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.res-hero{text-align:center;padding-top:30px;padding-bottom:26px;border-bottom:1px solid var(--rule);
+  background-image:repeating-linear-gradient(180deg,transparent 0,transparent 27px,rgba(122,26,26,.025) 27px,rgba(122,26,26,.025) 28px);}
+.res-hero .eyebrow{margin-bottom:6px;}
+.res-hero h2{font-family:var(--serif);font-weight:600;font-size:27px;margin:0 0 18px;}
+.score-box{display:inline-flex;flex-direction:column;align-items:center;border:2px solid;padding:16px 30px;margin-bottom:20px;}
+.score-box.pass{border-color:var(--correct);color:var(--correct);background:var(--correctBg);}
+.score-box.fail{border-color:var(--wrong);color:var(--wrong);background:var(--wrongBg);}
+.score-num{font-family:var(--serif);font-weight:600;font-size:46px;line-height:1;}
+.score-pct{font-family:var(--mono);font-size:12px;letter-spacing:.12em;margin-top:6px;}
+.passbar-wrap{max-width:420px;margin:0 auto 18px;}
+.passbar{position:relative;height:14px;background:var(--paperDeep);border:1px solid var(--rule);}
+.passbar-fill{position:absolute;left:0;top:0;bottom:0;}
+.passbar-fill.pass{background:var(--correct);}
+.passbar-fill.fail{background:var(--wrong);}
+.passbar-mark{position:absolute;top:-4px;bottom:-4px;left:60%;width:2px;background:var(--ink);}
+.passbar-labels{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--inkFaint);}
+.grade-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;border:1px solid;margin-bottom:12px;}
+.grade-badge.pass{color:var(--correct);border-color:var(--correct);background:var(--correctBg);}
+.grade-badge.fail{color:var(--wrong);border-color:var(--wrong);background:var(--wrongBg);}
+.verdict{font-style:italic;color:var(--inkSoft);max-width:460px;margin:0 auto;font-size:15px;}
+
+.review{padding-top:22px;padding-bottom:24px;}
+.review-head{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--inkFaint);
+  padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:4px;}
+.rev-item{padding:16px 0;border-bottom:1px solid var(--rule);}
+.rev-top{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.rev-num{font-family:var(--mono);font-size:13px;color:var(--inkFaint);min-width:22px;}
+.rev-flag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;}
+.rev-flag.ok{color:var(--correct);background:var(--correctBg);border:1px solid #A9C29C;}
+.rev-flag.no{color:var(--wrong);background:var(--wrongBg);border:1px solid #D9AFAF;}
+.rev-where{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--inkFaint);margin-bottom:6px;}
+.rev-ans{font-size:15px;line-height:1.5;margin-bottom:4px;}
+.rev-ans .you{color:var(--wrong);}
+.rev-ans .you s{text-decoration:line-through;text-decoration-color:var(--wrong);}
+.rev-ans .right{color:var(--correct);font-weight:500;}
+.rev-exp{font-size:14px;color:var(--inkSoft);font-style:italic;line-height:1.45;margin-top:3px;}
+
+/* ---------- modal ---------- */
+.modal-back{position:fixed;inset:0;background:rgba(26,22,18,.5);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;}
+.modal-back.show{display:flex;}
+.modal{background:var(--paper);border:1px solid var(--ink);max-width:360px;width:100%;padding:24px;}
+.modal h3{font-family:var(--serif);font-weight:600;font-size:22px;margin:0 0 8px;}
+.modal p{font-size:15px;color:var(--inkSoft);margin:0 0 20px;}
+.modal-actions{display:flex;gap:10px;}
+.modal-actions .nav-btn{flex:1;}
+
+/* ---------- tablet ---------- */
+@media (min-width:600px){
+  :root{--pad:32px;}
+  body{font-size:18px;}
+  .home-header{padding-top:calc(46px + env(safe-area-inset-top));}
+  .home-title{font-size:44px;}
+  .card{padding:22px;}
+  .card-icon{width:56px;height:56px;font-size:15px;}
+  .card-name{font-size:24px;}
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .q-prompt{font-size:26px;}
+  .passage-pane{max-height:40vh;}
+  .passage-text{font-size:17.5px;}
+}
+@media (min-width:600px) and (orientation:landscape){
+  .passage-pane{max-height:38vh;}
+}
+@media (max-width:599px) and (orientation:landscape){
+  .passage-pane{max-height:42vh;}
+}
+@media (prefers-reduced-motion:reduce){
+  .gap.active{animation:none;box-shadow:0 0 0 3px rgba(245,215,110,.4);}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view active">
+    <div class="home-scroll">
+      <header class="home-header">
+        <div class="wrap">
+          <div class="eyebrow">Cambridge C1 Advanced</div>
+          <h1 class="home-title">Reading &amp; <em>Use of English</em></h1>
+          <p class="home-sub">Übungs-Trainer · Bestehen ab 60&nbsp;%</p>
+          <div class="install-area" id="install-area" hidden>
+            <button class="install-btn" id="install-btn">⤓ Als App installieren</button>
+            <p class="install-hint" id="install-hint" hidden></p>
+          </div>
+        </div>
+      </header>
+      <div class="wrap">
+        <div id="cards" class="cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="view-quiz" class="view">
+    <div class="topbar">
+      <div class="wrap">
+        <div class="topbar-row">
+          <button class="icon-btn" id="q-close" aria-label="Test abbrechen">×</button>
+          <div class="topbar-titles">
+            <div class="row1">
+              <span class="topbar-cat" id="q-cat">Part 1</span>
+              <span class="topbar-count" id="q-count">1/8</span>
+            </div>
+            <div class="topbar-name" id="q-name">Multiple-Choice Cloze</div>
+          </div>
+        </div>
+        <div class="ticks" id="q-ticks"></div>
+      </div>
+    </div>
+
+    <div class="quiz-body" id="quiz-body">
+      <div class="passage-pane" id="passage-pane">
+        <div class="wrap">
+          <div class="passage-title" id="passage-title"></div>
+          <div class="passage-text" id="passage-text"></div>
+        </div>
+      </div>
+      <div class="qbody">
+        <div class="wrap" id="qbody-inner"></div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <button class="nav-btn" id="q-prev">← Zurück</button>
+      <button class="nav-btn primary" id="q-next" disabled>Weiter →</button>
+    </nav>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="view-results" class="view">
+    <div class="topbar">
+      <div class="wrap">
+        <div class="topbar-row">
+          <button class="icon-btn" id="r-close" aria-label="Zur Übersicht">×</button>
+          <div class="topbar-titles">
+            <div class="row1"><span class="topbar-cat" id="r-cat">Part 1 · Auswertung</span></div>
+            <div class="topbar-name" id="r-name">Multiple-Choice Cloze</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="results-scroll">
+      <div class="res-hero">
+        <div class="wrap" id="res-hero-inner"></div>
+      </div>
+      <div class="wrap review">
+        <div class="review-head">Fragen im Überblick</div>
+        <div id="review-list"></div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <button class="nav-btn" id="r-home">Zur Übersicht</button>
+      <button class="nav-btn primary" id="r-retry">Wiederholen ↻</button>
+    </nav>
+  </section>
+
+  <!-- ============ MODAL ============ -->
+  <div class="modal-back" id="modal">
+    <div class="modal">
+      <h3 id="modal-title">Test abbrechen?</h3>
+      <p id="modal-text">Dein bisheriger Fortschritt geht verloren.</p>
+      <div class="modal-actions">
+        <button class="nav-btn" id="modal-cancel">Weiter üben</button>
+        <button class="nav-btn primary" id="modal-ok">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* CAE Trainer — Fragenbank (1:1 aus der Spezifikation, §10)
+   Total: 96 Fragen (3 Passagen × 8 für Parts 1–3, plus 24 Transformations für Part 4). */
+
+const DATA = {
+  categories: [
+
+    /* ===================== PART 1 — Multiple-Choice Cloze ===================== */
+    {
+      id: 'part1', shortName: 'Part 1', name: 'Multiple-Choice Cloze', type: 'mc',
+      icon: 'MC', sessionLength: 8,
+      description: 'Wähle aus vier Optionen das beste Wort für jede Lücke.',
+      passages: [
+        {
+          title: 'The Overlooked Power of Small Habits',
+          text: 'Most people drastically {1} the long-term impact of the small habits they perform each day. We tend to {2} for dramatic, sweeping changes when, in reality, modest adjustments repeated consistently produce far more reliable results. Consider physical fitness: someone who exercises for thirty minutes daily will, over the {3} of a year, easily outperform someone who attempts gruelling weekly sessions but soon {4} out. The same principle {5} to learning a language, managing money, and maintaining relationships. The real challenge is that the effect of any single small action remains all but {6}, which makes it tempting to give up. Those who succeed tend to be the ones who {7} on regardless, trusting that the cumulative benefits will eventually {8} themselves felt.',
+          questions: [
+            { num:1, type:'mc', options:['underestimate','underrate','underplay','understate'], correct:0, explanation:'"Underestimate the impact" ist die feste Kollokation. "Underrate" passt zu Personen/Talenten.' },
+            { num:2, type:'mc', options:['hope','wait','aim','yearn'], correct:2, explanation:'"Aim for changes" — natürlichste Wendung. "Hope/yearn" zu emotional.' },
+            { num:3, type:'mc', options:['duration','length','course','span'], correct:2, explanation:'"Over the course of a year" — feste Zeitwendung.' },
+            { num:4, type:'mc', options:['burns','wears','gives','drops'], correct:1, explanation:'"Wear out" = sich erschöpfen.' },
+            { num:5, type:'mc', options:['fits','refers','applies','suits'], correct:2, explanation:'"The principle applies to X" — Standardkollokation.' },
+            { num:6, type:'mc', options:['imperceptible','invisible','inaudible','unobservable'], correct:0, explanation:'"All but imperceptible" = kaum wahrnehmbar (alle Sinne).' },
+            { num:7, type:'mc', options:['hold','forge','soldier','keep'], correct:2, explanation:'"Soldier on" = trotz Schwierigkeiten weitermachen.' },
+            { num:8, type:'mc', options:['get','make','have','bring'], correct:1, explanation:'"Make themselves felt" = sich bemerkbar machen.' }
+          ]
+        },
+        {
+          title: 'The Allure of Cities',
+          text: 'For thousands of years, cities have exerted a powerful {1} on the human imagination. Even those who claim to detest urban life often find themselves {2} towards the bright lights and ceaseless activity of the metropolis. Sociologists have long sought to understand why so many people are willing to {3} up with the noise, expense, and crowding that city living entails. Part of the answer {4} in the sheer density of opportunity that cities provide. A museum, a bustling market, and a quiet park may all lie {5} a few minutes’ walk of one another. Cities also tend to {6} creativity, by bringing together people of different backgrounds whose interactions spark fresh ideas. Of course, this comes {7} a price: rents are often crippling, and the pace can be exhausting. Yet for all their drawbacks, cities continue to attract migrants in their millions, drawn by the promise of opportunity that few other environments can {8}.',
+          questions: [
+            { num:1, type:'mc', options:['influence','dominance','authority','control'], correct:0, explanation:'Nur "influence on" idiomatisch — die anderen verlangen "over".' },
+            { num:2, type:'mc', options:['gravitating','drifting','heading','steering'], correct:0, explanation:'"Gravitate towards" = fast unwillkürliche Anziehung.' },
+            { num:3, type:'mc', options:['live','get','put','hold'], correct:2, explanation:'"Put up with sth" = dulden, ertragen.' },
+            { num:4, type:'mc', options:['lies','sits','stands','rests'], correct:0, explanation:'"The answer lies in" — feste Wendung.' },
+            { num:5, type:'mc', options:['within','inside','around','under'], correct:0, explanation:'"Within X minutes’ walk" — idiomatische Distanzangabe.' },
+            { num:6, type:'mc', options:['foster','impose','dictate','enforce'], correct:0, explanation:'"Foster creativity" = fördern (positiv).' },
+            { num:7, type:'mc', options:['at','for','by','with'], correct:0, explanation:'"Come at a price" — feste Wendung.' },
+            { num:8, type:'mc', options:['rival','equal','dispute','contradict'], correct:0, explanation:'"Rival" = ebenbürtig sein, mithalten.' }
+          ]
+        },
+        {
+          title: 'The Joy of Walking',
+          text: 'For most of human history, walking was simply a fact of {1}. It was how people moved between fields, markets, and one another’s homes — an unremarkable activity that {2} no special attention. Today, however, walking has been {3} as something almost extraordinary. Books are written about it. Apps measure it. Health experts {4} its virtues. Some of this enthusiasm is well {5}: regular walking has been shown to reduce stress, improve cardiovascular health, and even {6} creativity. Writers and philosophers have long {7} to the open road when seeking inspiration. But there is something curious about the way modern life has {8} a basic human activity into a kind of optional self-improvement project.',
+          questions: [
+            { num:1, type:'mc', options:['being','life','living','existence'], correct:1, explanation:'"A fact of life" — feste Wendung.' },
+            { num:2, type:'mc', options:['sent','pushed','drew','carried'], correct:2, explanation:'"Draw attention" — Standardkollokation.' },
+            { num:3, type:'mc', options:['shaped','framed','formed','drawn'], correct:1, explanation:'"Frame X as Y" = darstellen / einordnen.' },
+            { num:4, type:'mc', options:['shout','announce','declare','extol'], correct:3, explanation:'"Extol the virtues of" — die Vorzüge preisen.' },
+            { num:5, type:'mc', options:['seated','founded','settled','ranked'], correct:1, explanation:'"Well founded" = (gut) begründet.' },
+            { num:6, type:'mc', options:['climb','surge','boost','spike'], correct:2, explanation:'Nur "boost" ist transitiv und passt zu "creativity".' },
+            { num:7, type:'mc', options:['faced','turned','addressed','approached'], correct:1, explanation:'"Turn to" = sich zuwenden, Zuflucht suchen.' },
+            { num:8, type:'mc', options:['yielded','brought','bent','turned'], correct:3, explanation:'"Turn X into Y" — die anderen Verben kollocieren nicht mit "into".' }
+          ]
+        }
+      ]
+    },
+
+    /* ===================== PART 2 — Open Cloze ===================== */
+    {
+      id: 'part2', shortName: 'Part 2', name: 'Open Cloze', type: 'open',
+      icon: '___', sessionLength: 8,
+      description: 'Setze ein einzelnes Wort in jede Lücke (Präpositionen, Phrasal Verbs, Strukturwörter).',
+      passages: [
+        {
+          title: 'Why We Sleep',
+          text: 'For centuries, sleep was largely considered a passive state during {1} very little of significance occurred in the body. Modern science, {2}, has thoroughly overturned this view. Researchers now know that, {3} from being a period of inactivity, sleep is when the brain carries {4} some of its most important maintenance work. Memories are consolidated, toxins are flushed away, and damaged tissues are repaired. {5} a result, even a single night of poor sleep can have noticeable consequences {6} both mental and physical performance. {7} make matters worse, the long-term effects of chronic sleep deprivation include a heightened risk of serious illness. Despite this, many adults continue to {8} by on far less sleep than they need.',
+          questions: [
+            { num:1, type:'open', accept:['which'], explanation:'"During which" — Relativpronomen nach Präposition.' },
+            { num:2, type:'open', accept:['however'], explanation:'Kontrastmarker.' },
+            { num:3, type:'open', accept:['far'], explanation:'"Far from being" = ganz im Gegenteil.' },
+            { num:4, type:'open', accept:['out'], explanation:'"Carry out work" — Phrasal Verb.' },
+            { num:5, type:'open', accept:['as'], explanation:'"As a result" — feste Wendung.' },
+            { num:6, type:'open', accept:['for','on'], explanation:'"Consequences for/on" — beide akzeptiert.' },
+            { num:7, type:'open', accept:['to'], explanation:'"To make matters worse" — Satzeinstieg.' },
+            { num:8, type:'open', accept:['get'], explanation:'"Get by on" = mit etw. auskommen.' }
+          ]
+        },
+        {
+          title: 'The Rise of the Podcast',
+          text: 'Podcasts have become one of the most popular forms of media in recent years, with millions of listeners tuning {1} each week. {2} from being a passing fad, the medium has steadily grown since its emergence {3} the early 2000s. Part of the appeal lies in the fact {4} podcasts can be consumed almost anywhere — on the commute, while exercising, or during household chores. Another factor is the remarkable variety on offer; {5} matter how niche your interests, there is almost certainly a podcast devoted to them. Critics, however, point {6} that the explosion in podcast numbers has made it increasingly difficult for new shows {7} stand out. As the market becomes more crowded, only those producers willing to invest seriously in quality and marketing are likely to {8} noticed.',
+          questions: [
+            { num:1, type:'open', accept:['in'], explanation:'"Tune in" — einschalten.' },
+            { num:2, type:'open', accept:['far'], explanation:'"Far from being" — feste Wendung.' },
+            { num:3, type:'open', accept:['in'], explanation:'Zeitangabe für Jahrzehnte: "in the early 2000s".' },
+            { num:4, type:'open', accept:['that'], explanation:'"The fact that" — Konjunktion.' },
+            { num:5, type:'open', accept:['no'], explanation:'"No matter how" — Konzessivmuster.' },
+            { num:6, type:'open', accept:['out'], explanation:'"Point out (that)" — darauf hinweisen.' },
+            { num:7, type:'open', accept:['to'], explanation:'"Difficult for sb to do sth" — to-Infinitiv.' },
+            { num:8, type:'open', accept:['get','be'], explanation:'"Get/Be noticed" — beide akzeptiert.' }
+          ]
+        },
+        {
+          title: 'The History of Coffee',
+          text: 'The story of coffee begins in the highlands of Ethiopia, {1} legend has it that a goatherd named Kaldi noticed his animals dancing with energy after eating certain red berries. {2} the truth of this tale, coffee soon spread northwards across the Red Sea {3} Yemen, where it was cultivated systematically for the first time. From there, it travelled along trade routes {4} the Ottoman world, becoming central to social life by the 16th century. Coffee houses sprang up in cities {5} as Istanbul, Cairo, and eventually London, providing spaces {6} which people of different backgrounds could meet, debate, and exchange ideas. Critics warned that these establishments encouraged idleness; supporters argued that they were essential {7} a thriving civil society. {8} way one looks at it, coffee transformed how people thought, met, and worked.',
+          questions: [
+            { num:1, type:'open', accept:['where'], explanation:'Relativadverb für Ort.' },
+            { num:2, type:'open', accept:['whatever'], explanation:'"Whatever the truth of" — Konzessivkonstruktion.' },
+            { num:3, type:'open', accept:['to'], explanation:'"Spread to X" — Bewegung zu Zielort.' },
+            { num:4, type:'open', accept:['into','through'], explanation:'"Into/through" — beide möglich.' },
+            { num:5, type:'open', accept:['such'], explanation:'"Such as" = wie zum Beispiel.' },
+            { num:6, type:'open', accept:['in'], explanation:'"Spaces in which" — Präposition + Relativpronomen.' },
+            { num:7, type:'open', accept:['to','for'], explanation:'"Essential to/for" — beide gelten.' },
+            { num:8, type:'open', accept:['whichever','whatever'], explanation:'"Whichever way one looks at it" — feste Wendung.' }
+          ]
+        }
+      ]
+    },
+
+    /* ===================== PART 3 — Word Formation ===================== */
+    {
+      id: 'part3', shortName: 'Part 3', name: 'Word Formation', type: 'word',
+      icon: 'WF', sessionLength: 8,
+      description: 'Forme das Grundwort in GROSSBUCHSTABEN passend zur Lücke um.',
+      passages: [
+        {
+          title: 'The Climate Conundrum',
+          text: 'Climate change presents one of the most {1} issues of our time. Scientists have provided {2} evidence that human activity is responsible for rising global temperatures. Despite this, public response has been {3} slow, partly due to widespread {4} about what individual citizens can actually do. Many feel a deep sense of {5} when faced with such a vast problem. However, experts insist that small {6} changes, when adopted on a large scale, can have a {7} impact. The key, they argue, is to move beyond mere {8} and toward concrete action.',
+          questions: [
+            { num:1, type:'word', base:'CHALLENGE', accept:['challenging'], explanation:'Adjektiv vor "issues".' },
+            { num:2, type:'word', base:'OVERWHELM', accept:['overwhelming'], explanation:'"Overwhelming evidence" — feste Kollokation.' },
+            { num:3, type:'word', base:'NOTICE', accept:['noticeably'], explanation:'Adverb, modifiziert "slow".' },
+            { num:4, type:'word', base:'CONFUSE', accept:['confusion'], explanation:'Substantiv nach "widespread".' },
+            { num:5, type:'word', base:'HELP', accept:['helplessness'], explanation:'Doppelter Suffix: -less + -ness.' },
+            { num:6, type:'word', base:'BEHAVE', accept:['behavioural','behavioral'], explanation:'Adjektiv. UK/US gelten beide.' },
+            { num:7, type:'word', base:'MEANING', accept:['meaningful'], explanation:'Adjektiv → "meaningful impact".' },
+            { num:8, type:'word', base:'AWARE', accept:['awareness'], explanation:'Substantiv nach "beyond mere".' }
+          ]
+        },
+        {
+          title: 'Why We Forget',
+          text: 'Forgetting is often viewed as a {1} of the brain, but neuroscientists increasingly regard it as essential to {2} cognitive function. Memory is not designed to be {3}; rather, it operates by selectively eliminating information that lacks emotional {4}. This {5} process is what allows us to focus on truly {6} details. Although forgetting can be {7}, it should not be regarded as a {8}; on the contrary, it is one of the brain’s most sophisticated achievements.',
+          questions: [
+            { num:1, type:'word', base:'FAIL', accept:['failure'], explanation:'Substantiv nach "a".' },
+            { num:2, type:'word', base:'HEALTH', accept:['healthy'], explanation:'Adjektiv vor "function".' },
+            { num:3, type:'word', base:'COMPREHEND', accept:['comprehensive'], explanation:'Adjektiv = umfassend.' },
+            { num:4, type:'word', base:'SIGNIFY', accept:['significance'], explanation:'Substantiv = Bedeutung.' },
+            { num:5, type:'word', base:'SELECT', accept:['selective'], explanation:'Adjektiv vor "process".' },
+            { num:6, type:'word', base:'MEAN', accept:['meaningful'], explanation:'Adjektiv → "meaningful details".' },
+            { num:7, type:'word', base:'FRUSTRATE', accept:['frustrating'], explanation:'-ing-Adjektiv für die Wirkung.' },
+            { num:8, type:'word', base:'WEAK', accept:['weakness'], explanation:'Substantiv, Suffix -ness.' }
+          ]
+        },
+        {
+          title: 'Why We Read Fiction',
+          text: 'For centuries, the {1} of imaginary worlds has captivated human beings. Some have viewed this fascination with {2}, arguing that time spent on fiction is time stolen from more {3} pursuits. Recent psychological research, however, suggests that reading novels may bring {4} cognitive and social benefits. Studies show that readers of literary fiction develop a {5} improvement in their ability to understand the emotions of others. This skill is {6} for navigating complex social situations. Reading also seems to {7} memory and concentration. Far from being a frivolous {8}, the habit of reading fiction may be one of the most valuable mental exercises we can perform.',
+          questions: [
+            { num:1, type:'word', base:'REAL', accept:['reality'], explanation:'Substantiv nach "the".' },
+            { num:2, type:'word', base:'SUSPECT', accept:['suspicion'], explanation:'"With suspicion" = misstrauisch.' },
+            { num:3, type:'word', base:'PRODUCT', accept:['productive'], explanation:'Adjektiv vor "pursuits".' },
+            { num:4, type:'word', base:'CONSIDER', accept:['considerable'], explanation:'Adjektiv = beträchtlich.' },
+            { num:5, type:'word', base:'NOTICE', accept:['noticeable'], explanation:'Adjektiv vor "improvement".' },
+            { num:6, type:'word', base:'ESSENCE', accept:['essential'], explanation:'Adjektiv vor "for".' },
+            { num:7, type:'word', base:'STRONG', accept:['strengthen'], explanation:'Verb-Infinitiv nach "to".' },
+            { num:8, type:'word', base:'DISTRACT', accept:['distraction'], explanation:'Substantiv nach "a frivolous".' }
+          ]
+        }
+      ]
+    },
+
+    /* ===================== PART 4 — Key Word Transformations (Pool 24) ===================== */
+    {
+      id: 'part4', shortName: 'Part 4', name: 'Key Word Transformations', type: 'transform',
+      icon: '⇄', sessionLength: 6,
+      description: 'Schreibe den Satz mit dem Schlüsselwort um (2–5 Wörter). Schlüsselwort nicht verändern.',
+      pool: [
+        { type:'transform', original:'I regret not studying harder for my exams.', keyword:'WISH', gapped:'I _____ for my exams.', accept:['wish i had studied harder',"wish i'd studied harder"], explanation:'"I wish + Past Perfect" — bedauernder Wunsch in der Vergangenheit.' },
+        { type:'transform', original:'It’s possible that Sarah forgot about the meeting.', keyword:'HAVE', gapped:'Sarah _____ about the meeting.', accept:['may have forgotten','might have forgotten','could have forgotten'], explanation:'Modales Perfekt: may/might/could + have + Past Participle.' },
+        { type:'transform', original:'They started building the bridge two years ago.', keyword:'WORKING', gapped:'They _____ on the bridge for two years.', accept:['have been working',"'ve been working"], explanation:'Present Perfect Continuous + "work on".' },
+        { type:'transform', original:'The teacher made us rewrite the essay.', keyword:'FORCED', gapped:'We _____ the essay by the teacher.', accept:['were forced to rewrite'], explanation:'Passiv mit "force" + to-Infinitiv.' },
+        { type:'transform', original:'I’m sure he didn’t take the money.', keyword:'HAVE', gapped:'He _____ the money.', accept:["can't have taken",'cannot have taken',"couldn't have taken"], explanation:'"Can’t/couldn’t have + Past Participle" — sichere Verneinung.' },
+        { type:'transform', original:'Despite his lack of experience, he got the job.', keyword:'FACT', gapped:'He got the job _____ he lacked experience.', accept:['despite the fact that','in spite of the fact that'], explanation:'"Despite/In spite of the fact that" + Nebensatz.' },
+        { type:'transform', original:'She didn’t manage to finish the report on time.', keyword:'SUCCEED', gapped:'She _____ the report on time.', accept:["didn't succeed in finishing",'did not succeed in finishing'], explanation:'"Succeed in + Gerund".' },
+        { type:'transform', original:'It is a long time since they last visited us.', keyword:'VISITED', gapped:'They _____ for a long time.', accept:["haven't visited us",'have not visited us'], explanation:'Present Perfect mit Verneinung + Zeitraum.' },
+        { type:'transform', original:'I’d prefer you not to mention this to anyone.', keyword:'RATHER', gapped:'I _____ this to anyone.', accept:["would rather you didn't mention","'d rather you didn't mention",'would rather you did not mention'], explanation:'"Would rather + subject + Past Simple" für Präferenz bzgl. anderer.' },
+        { type:'transform', original:'The exhibition was so popular that we had to extend it.', keyword:'SUCH', gapped:'It was _____ that we had to extend it.', accept:['such a popular exhibition'], explanation:'"So + Adj." → "such a + Adj. + Subst.".' },
+        { type:'transform', original:'Tom was about to leave when his phone rang.', keyword:'POINT', gapped:'Tom was _____ when his phone rang.', accept:['on the point of leaving','at the point of leaving'], explanation:'"On the point of + Gerund" = im Begriff zu tun.' },
+        { type:'transform', original:'If you don’t apologize, she’ll never speak to you again.', keyword:'UNLESS', gapped:"She'll never speak to you again _____ apologize.", accept:['unless you'], explanation:'"Unless" = wenn nicht. Ersetzt "if … not".' },
+        { type:'transform', original:'I haven’t seen Tom for ages.', keyword:'SINCE', gapped:"It's _____ I last saw Tom.", accept:['been ages since','been a long time since'], explanation:'"It’s been + Zeitraum + since + Past Simple".' },
+        { type:'transform', original:'You should have told me earlier.', keyword:'WISH', gapped:'I _____ me earlier.', accept:['wish you had told',"wish you'd told"], explanation:'"Wish + subject + Past Perfect".' },
+        { type:'transform', original:'Visitors are not allowed to take photographs in the museum.', keyword:'PROHIBITED', gapped:'Visitors _____ photographs in the museum.', accept:['are prohibited from taking'], explanation:'"Be prohibited from + Gerund".' },
+        { type:'transform', original:'I started this project six months ago.', keyword:'WORKING', gapped:'I _____ project for six months.', accept:['have been working on this',"'ve been working on this"], explanation:'Present Perfect Continuous + "work on".' },
+        { type:'transform', original:'The film is so popular that all the tickets have sold out.', keyword:'SUCH', gapped:'It _____ that all the tickets have sold out.', accept:['is such a popular film'], explanation:'"So + Adj." → "such a + Adj. + Subst.".' },
+        { type:'transform', original:'Don’t blame me for what happened.', keyword:'FAULT', gapped:'What happened _____.', accept:["wasn't my fault",'was not my fault'], explanation:'"X is/was not my fault" — Past Simple wegen "happened".' },
+        { type:'transform', original:'Without your help, I would never have finished.', keyword:'BEEN', gapped:'If _____ for your help, I would never have finished.', accept:["it hadn't been",'it had not been'], explanation:'"If it hadn’t been for X" = ohne X.' },
+        { type:'transform', original:'My old phone is faster than my new one.', keyword:'AS', gapped:'My new phone _____ my old one.', accept:['is not as fast as',"isn't as fast as"], explanation:'"Not as + Adj. + as" für Vergleich.' },
+        { type:'transform', original:'It was a mistake to lend him the money.', keyword:"SHOULDN'T", gapped:'I _____ him the money.', accept:["shouldn't have lent",'should not have lent'], explanation:'"Shouldn’t have + Past Participle" — Bedauern.' },
+        { type:'transform', original:'She felt embarrassed when she realised her mistake.', keyword:'TO', gapped:'Much _____, she realised her mistake.', accept:['to her embarrassment'], explanation:'"To my/her + Subst." = sehr zu meinem/ihrem …' },
+        { type:'transform', original:'We didn’t go to the beach because it was raining.', keyword:'BEEN', gapped:'If it _____ raining, we would have gone to the beach.', accept:["hadn't been",'had not been'], explanation:'Third Conditional.' },
+        { type:'transform', original:'Andy regrets not buying the house when it was cheap.', keyword:'WISHES', gapped:'Andy _____ the house when it was cheap.', accept:['wishes he had bought',"wishes he'd bought"], explanation:'"Wish + Past Perfect" für Vergangenheitswunsch.' }
+      ]
+    }
+  ]
+};
+
+</script>
+<script>
+/* CAE Trainer — App-Logik (Vanilla JS).
+   Views: home / quiz / results. State via einfache Module-Variablen. */
+
+'use strict';
+
+const PASS_THRESHOLD = 0.6;
+const STORE_KEY = 'cae_trainer_scores_v1';
+
+/* ---------------- Persistenz ---------------- */
+function loadScores() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+  catch (_) { return {}; }
+}
+function saveScore(catId, pct, passed) {
+  const all = loadScores();
+  const prev = all[catId] || {};
+  const prevBest = prev.best != null ? prev.best : (prev.pct || 0);
+  const best = Math.max(prevBest, pct);
+  all[catId] = { pct, passed, when: Date.now(), best, attempts: (prev.attempts || 0) + 1 };
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(all)); } catch (_) {}
+}
+
+/* ---------------- Helpers ---------------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const cat = id => DATA.categories.find(c => c.id === id);
+function poolSize(c) {
+  return c.passages ? c.passages.reduce((n, p) => n + p.questions.length, 0) : c.pool.length;
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+}
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ---------------- Bewertung ---------------- */
+function normalize(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/[‘’‚‛′‵]/g, "'") // smart single quotes → '
+    .replace(/[“”″]/g, '"')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+function isCorrect(q, answer) {
+  if (q.type === 'mc') return answer === q.correct;
+  if (answer == null || String(answer).trim() === '') return false;
+  const n = normalize(answer);
+  return q.accept.some(acc => normalize(acc) === n);
+}
+
+/* ---------------- Session ---------------- */
+let session = null;
+
+function buildSession(catId) {
+  const c = cat(catId);
+  let passage = null, questions;
+  if (c.type === 'transform') {
+    questions = shuffle(c.pool).slice(0, c.sessionLength)
+      .map((q, i) => Object.assign({}, q, { num: i + 1 }));
+  } else {
+    passage = c.passages[Math.floor(Math.random() * c.passages.length)];
+    questions = passage.questions;
+  }
+  session = { cat: c, passage, questions, answers: {}, idx: 0 };
+}
+
+function curQ() { return session.questions[session.idx]; }
+function answerOf(num) { return session.answers[num]; }
+function hasAnswer(q) {
+  const a = session.answers[q.num];
+  if (q.type === 'mc') return a != null;
+  return a != null && String(a).trim() !== '';
+}
+
+/* ---------------- View-Steuerung ---------------- */
+function show(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $('#' + viewId).classList.add('active');
+}
+
+/* ---------------- HOME ---------------- */
+function renderHome() {
+  const scores = loadScores();
+  const html = DATA.categories.map(c => {
+    const s = scores[c.id];
+    let progress;
+    if (s) {
+      const best = s.best != null ? s.best : s.pct;
+      const bp = Math.round(best * 100);
+      const passed = best >= PASS_THRESHOLD;
+      const cls = passed ? 'pass' : 'fail';
+      const status = passed ? '✓ Bestanden' : 'Ziel: 60 %';
+      progress = `
+        <span class="card-progress">
+          <span class="cp-bar"><span class="cp-fill ${cls}" style="width:${bp}%"></span><span class="cp-mark"></span></span>
+          <span class="cp-labels"><span class="cp-pct ${cls}">${bp}%</span><span class="cp-status">${status}</span></span>
+        </span>`;
+    } else {
+      progress = `
+        <span class="card-progress">
+          <span class="cp-bar"><span class="cp-fill none" style="width:0%"></span><span class="cp-mark"></span></span>
+          <span class="cp-labels"><span class="cp-pct none">0%</span><span class="cp-status">Noch nicht geübt</span></span>
+        </span>`;
+    }
+    return `
+      <button class="card" data-cat="${c.id}">
+        <span class="card-icon">${escapeHtml(c.icon)}</span>
+        <span class="card-main">
+          <span class="card-meta">${escapeHtml(c.shortName)} · ${c.sessionLength} Q · Pool ${poolSize(c)}</span>
+          <span class="card-name">${escapeHtml(c.name)}</span>
+          <span class="card-desc">${escapeHtml(c.description)}</span>
+          ${progress}
+        </span>
+        <span class="card-chevron">›</span>
+      </button>`;
+  }).join('');
+  $('#cards').innerHTML = html;
+  $('#cards').querySelectorAll('.card').forEach(el =>
+    el.addEventListener('click', () => startQuiz(el.dataset.cat)));
+}
+
+/* ---------------- QUIZ ---------------- */
+function startQuiz(catId) {
+  buildSession(catId);
+  show('view-quiz');
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const c = session.cat, q = curQ(), total = session.questions.length;
+  $('#q-cat').textContent = c.shortName;
+  $('#q-name').textContent = c.name;
+  $('#q-count').textContent = `${session.idx + 1}/${total}`;
+
+  // Ticks
+  $('#q-ticks').innerHTML = session.questions.map((_, i) =>
+    `<span class="tick ${i < session.idx ? 'done' : i === session.idx ? 'cur' : ''}"></span>`).join('');
+
+  // Passage-Pane (Parts 1–3) oder verstecken (Part 4)
+  const pane = $('#passage-pane');
+  if (session.passage) {
+    pane.style.display = '';
+    $('#passage-title').textContent = session.passage.title;
+    $('#passage-text').innerHTML = renderPassage(session.passage, q.num);
+  } else {
+    pane.style.display = 'none';
+  }
+
+  // Frage-Body
+  $('#qbody-inner').innerHTML = renderQuestionBody(q);
+  wireQuestionBody(q);
+
+  // Nav
+  $('#q-prev').textContent = session.idx === 0 ? '✕ Beenden' : '← Zurück';
+  const next = $('#q-next');
+  next.textContent = session.idx === total - 1 ? 'Auswerten ✓' : 'Weiter →';
+  next.disabled = !hasAnswer(q);
+
+  // Scroll zur aktiven Lücke
+  if (session.passage) {
+    requestAnimationFrame(() => {
+      const active = $('#passage-text .gap.active');
+      if (active) active.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      $('#quiz-body').scrollTop = $('#quiz-body').scrollHeight; // Frage ins Bild
+    });
+  }
+}
+
+function renderPassage(passage, activeNum) {
+  // Text mit {N} → styled spans
+  const parts = passage.text.split(/(\{\d+\})/g);
+  return parts.map(part => {
+    const m = part.match(/^\{(\d+)\}$/);
+    if (!m) return escapeHtml(part);
+    const num = parseInt(m[1], 10);
+    const q = passage.questions.find(x => x.num === num);
+    const ans = session.answers[num];
+    let state = 'empty', label;
+    if (num === activeNum) state = 'active';
+    else if (q.type === 'mc' ? ans != null : (ans != null && String(ans).trim() !== '')) state = 'answered';
+
+    if (state === 'answered') {
+      label = q.type === 'mc' ? escapeHtml(q.options[ans]) : escapeHtml(String(ans).trim());
+    } else if (q.type === 'word') {
+      label = `${num} · ${escapeHtml(q.base)}`;
+    } else {
+      label = String(num);
+    }
+    return `<span class="gap ${state}">${label}</span>`;
+  }).join('');
+}
+
+function renderQuestionBody(q) {
+  const n = q.num;
+  if (q.type === 'mc') {
+    const opts = q.options.map((opt, i) => {
+      const sel = session.answers[n] === i ? ' sel' : '';
+      const letter = 'ABCD'[i];
+      return `<button class="option${sel}" data-i="${i}">
+        <span class="marker"></span><span class="lett">${letter}</span>
+        <span class="txt">${escapeHtml(opt)}</span></button>`;
+    }).join('');
+    return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · Multiple-Choice</div>
+      <div class="q-prompt">Wähle das beste Wort für Lücke <b>(${n})</b>.</div>
+      <div class="options">${opts}</div>`;
+  }
+
+  if (q.type === 'open') {
+    const val = session.answers[n] != null ? escapeHtml(session.answers[n]) : '';
+    return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · Open Cloze</div>
+      <div class="q-prompt">Ein Wort für Lücke <b>(${n})</b>.</div>
+      <div class="hint">Meist Präpositionen, Phrasal-Verb-Partikel oder Strukturwörter.</div>
+      <input class="answer-input" id="ans" type="text" inputmode="text"
+        autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+        placeholder="ein Wort…" value="${val}" />`;
+  }
+
+  if (q.type === 'word') {
+    const val = session.answers[n] != null ? escapeHtml(session.answers[n]) : '';
+    return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · Word Formation</div>
+      <div class="q-prompt">Bilde die richtige Form für Lücke <b>(${n})</b>.</div>
+      <div class="basework">
+        <span class="base-tag">${escapeHtml(q.base)}</span>
+        <span class="arrow">→</span>
+      </div>
+      <input class="answer-input" id="ans" type="text" inputmode="text"
+        autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+        placeholder="umgeformtes Wort…" value="${val}" />`;
+  }
+
+  // transform
+  const val = session.answers[n] != null ? escapeHtml(session.answers[n]) : '';
+  const gapped = escapeHtml(q.gapped).replace(/_+/, '<span class="tgap-mark">⟨ 2–5 Wörter ⟩</span>');
+  return `<div class="q-eyebrow">${escapeHtml(session.cat.shortName)} · Key Word Transformation</div>
+    <div class="tblock">
+      <div class="tline torig"><span class="tlabel">Original</span>${escapeHtml(q.original)}</div>
+      <div><span class="tlabel">Schlüsselwort</span><span class="tkey">${escapeHtml(q.keyword)}</span></div>
+      <div class="tline tgapped"><span class="tlabel">Vervollständige</span>${gapped}</div>
+    </div>
+    <input class="answer-input" id="ans" type="text" inputmode="text"
+      autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+      placeholder="2–5 Wörter…" value="${val}" />`;
+}
+
+function wireQuestionBody(q) {
+  if (q.type === 'mc') {
+    $('#qbody-inner').querySelectorAll('.option').forEach(el => {
+      el.addEventListener('click', () => {
+        session.answers[q.num] = parseInt(el.dataset.i, 10);
+        renderQuiz();
+      });
+    });
+  } else {
+    const inp = $('#ans');
+    inp.addEventListener('input', () => {
+      session.answers[q.num] = inp.value;
+      $('#q-next').disabled = !hasAnswer(q);
+      // Lücken-Status live aktualisieren (ohne Fokus zu verlieren)
+      if (session.passage) $('#passage-text').innerHTML = renderPassage(session.passage, q.num);
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (hasAnswer(q)) goNext(); }
+    });
+    // Autofokus auf Desktop/Tablet (nicht auf Phone, um Tastatur-Sprung zu vermeiden)
+    if (window.matchMedia('(min-width:600px)').matches) setTimeout(() => inp.focus(), 50);
+  }
+}
+
+function goNext() {
+  if (!hasAnswer(curQ())) return;
+  if (session.idx < session.questions.length - 1) {
+    session.idx++;
+    renderQuiz();
+  } else {
+    finishQuiz();
+  }
+}
+function goPrev() {
+  if (session.idx === 0) { openModal('quit'); return; }
+  session.idx--;
+  renderQuiz();
+}
+
+/* ---------------- RESULTS ---------------- */
+function gradeBand(pct) {
+  if (pct >= 0.85) return { grade: 'A — Excellent', verdict: 'Sehr starkes Ergebnis. Du bewegst dich auf C1-Bestnote / C2-Niveau zu.' };
+  if (pct >= 0.75) return { grade: 'B — Good Pass', verdict: 'Solides C1. Komfortabel über der Bestehensgrenze.' };
+  if (pct >= 0.60) return { grade: 'C — Pass', verdict: 'Bestanden, aber knapp. Diese Kategorie noch ein paar Mal wiederholen.' };
+  if (pct >= 0.50) return { grade: 'Knapp daneben', verdict: 'Sehr nah dran. Mit ein paar Wiederholungen sind die 60 % erreichbar.' };
+  return { grade: 'Noch nicht', verdict: 'Empfehlung: das Thema systematisch durcharbeiten (z. B. mit Objective Advanced).' };
+}
+
+function finishQuiz() {
+  const qs = session.questions;
+  const correct = qs.filter(q => isCorrect(q, session.answers[q.num])).length;
+  const total = qs.length;
+  const pct = correct / total;
+  const passed = pct >= PASS_THRESHOLD;
+  saveScore(session.cat.id, pct, passed);
+  renderResults(correct, total, pct, passed);
+  show('view-results');
+  $('.results-scroll').scrollTop = 0;
+}
+
+function renderResults(correct, total, pct, passed) {
+  const c = session.cat;
+  const pctRound = Math.round(pct * 100);
+  const cls = passed ? 'pass' : 'fail';
+  const { grade, verdict } = gradeBand(pct);
+  $('#r-cat').textContent = `${c.shortName} · Auswertung`;
+  $('#r-name').textContent = c.name;
+
+  $('#res-hero-inner').innerHTML = `
+    <div class="eyebrow">${escapeHtml(c.shortName)} · ${escapeHtml(c.name)}</div>
+    <h2>Ergebnis</h2>
+    <div class="score-box ${cls}">
+      <span class="score-num">${correct}/${total}</span>
+      <span class="score-pct">${pctRound}% · Schwelle 60%</span>
+    </div>
+    <div class="passbar-wrap">
+      <div class="passbar">
+        <div class="passbar-fill ${cls}" style="width:${pctRound}%"></div>
+        <div class="passbar-mark"></div>
+      </div>
+      <div class="passbar-labels"><span>0%</span><span>60% Bestehen</span><span>100%</span></div>
+    </div>
+    <div class="grade-badge ${cls}">${passed ? '✓ Bestanden' : '✗ Nicht bestanden'} · ${escapeHtml(grade)}</div>
+    <div class="verdict">${escapeHtml(verdict)}</div>`;
+
+  $('#review-list').innerHTML = session.questions.map(q => reviewItem(q)).join('');
+}
+
+function reviewItem(q) {
+  const ans = session.answers[q.num];
+  const ok = isCorrect(q, ans);
+  const where = q.type === 'transform'
+    ? `Transformation (${q.num}) · ${escapeHtml(q.keyword)}`
+    : `Lücke (${q.num})`;
+
+  let correctTxt, yourTxt;
+  if (q.type === 'mc') {
+    correctTxt = `${'ABCD'[q.correct]} — ${escapeHtml(q.options[q.correct])}`;
+    yourTxt = ans != null ? `${'ABCD'[ans]} — ${escapeHtml(q.options[ans])}` : '—';
+  } else {
+    correctTxt = q.accept.map(escapeHtml).join(' / ');
+    yourTxt = (ans != null && String(ans).trim() !== '') ? escapeHtml(String(ans).trim()) : '—';
+  }
+
+  const ansLine = ok
+    ? `<div class="rev-ans"><span class="right">Richtig: ${correctTxt}</span></div>`
+    : `<div class="rev-ans"><span class="you">Du: <s>${yourTxt}</s></span> &nbsp;·&nbsp; <span class="right">Richtig: ${correctTxt}</span></div>`;
+
+  return `
+    <div class="rev-item">
+      <div class="rev-top">
+        <span class="rev-num">${q.num}</span>
+        <span class="rev-flag ${ok ? 'ok' : 'no'}">${ok ? '✓ Richtig' : '✗ Falsch'}</span>
+      </div>
+      <div class="rev-where">${where}</div>
+      ${ansLine}
+      <div class="rev-exp">${escapeHtml(q.explanation)}</div>
+    </div>`;
+}
+
+/* ---------------- Modal ---------------- */
+let modalAction = null;
+function openModal(kind) {
+  modalAction = kind;
+  $('#modal-title').textContent = 'Test abbrechen?';
+  $('#modal-text').textContent = 'Dein bisheriger Fortschritt in dieser Session geht verloren.';
+  $('#modal').classList.add('show');
+}
+function closeModal() { $('#modal').classList.remove('show'); modalAction = null; }
+
+/* ---------------- Events ---------------- */
+$('#q-next').addEventListener('click', goNext);
+$('#q-prev').addEventListener('click', goPrev);
+$('#q-close').addEventListener('click', () => openModal('quit'));
+
+$('#modal-cancel').addEventListener('click', closeModal);
+$('#modal-ok').addEventListener('click', () => {
+  closeModal();
+  renderHome();
+  show('view-home');
+});
+
+$('#r-home').addEventListener('click', () => { renderHome(); show('view-home'); });
+$('#r-close').addEventListener('click', () => { renderHome(); show('view-home'); });
+$('#r-retry').addEventListener('click', () => { startQuiz(session.cat.id); });
+
+/* Browser-Back abfangen, damit kein versehentliches Verlassen */
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && $('#modal').classList.contains('show')) closeModal();
+});
+
+/* ---------------- PWA: Service Worker + Installation ---------------- */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+
+const installArea = $('#install-area');
+const installBtn = $('#install-btn');
+const installHint = $('#install-hint');
+let deferredPrompt = null;
+
+const isStandalone = () =>
+  window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const isiOS = () =>
+  /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (isStandalone()) return;
+  installArea.hidden = false;
+  installBtn.hidden = false;
+  installHint.hidden = true;
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installArea.hidden = true;
+});
+
+window.addEventListener('appinstalled', () => { installArea.hidden = true; });
+
+// iOS/iPadOS Safari kennt kein beforeinstallprompt → Anleitung einblenden.
+if (!isStandalone() && isiOS()) {
+  installArea.hidden = false;
+  installBtn.hidden = true;
+  installHint.hidden = false;
+  installHint.innerHTML =
+    'Auf iPhone/iPad in <b>Safari</b>: unten das <b>Teilen-Symbol</b> antippen → ' +
+    '<b>„Zum Home-Bildschirm“</b>. Danach startet der Trainer wie eine echte App – auch offline.';
+}
+if (isStandalone()) installArea.hidden = true;
+
+/* ---------------- Init ---------------- */
+renderHome();
+
+</script>
+</body>
+</html>
