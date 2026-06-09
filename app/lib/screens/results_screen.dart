@@ -222,7 +222,8 @@ class ResultsScreen extends StatelessWidget {
 
     String correctTxt, yourTxt;
     if (q.type == QType.mc) {
-      correctTxt = '${'ABCD'[q.correct!]} — ${q.options![q.correct!]}';
+      final idxs = <int>[q.correct!, ...?q.also];
+      correctTxt = idxs.map((i) => '${'ABCD'[i]} — ${q.options![i]}').join(' / ');
       final ai = ans as int?;
       yourTxt = ai != null ? '${'ABCD'[ai]} — ${q.options![ai]}' : '—';
     } else {

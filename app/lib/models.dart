@@ -14,6 +14,9 @@ class Question {
   final List<String>? options;
   final int? correct;
 
+  /// Weitere ebenfalls akzeptierte MC-Indizes (neben [correct]).
+  final List<int>? also;
+
   // Open Cloze / Word Formation / Transform — akzeptierte Lösungen
   final List<String>? accept;
 
@@ -31,6 +34,7 @@ class Question {
     required this.explanation,
     this.options,
     this.correct,
+    this.also,
     this.accept,
     this.base,
     this.original,
@@ -44,6 +48,7 @@ class Question {
         explanation: explanation,
         options: options,
         correct: correct,
+        also: also,
         accept: accept,
         base: base,
         original: original,
