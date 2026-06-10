@@ -2786,7 +2786,20 @@ window.addEventListener('keydown', e => {
 
 /* ---------------- PWA: Service Worker + Installation ---------------- */
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  // Selbstheilung: wenn ein aktualisierter Service Worker übernimmt, einmal neu laden,
+  // damit eine evtl. veraltete/leere gecachte Seite sofort durch frische Inhalte ersetzt wird.
+  const hadController = !!navigator.serviceWorker.controller;
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloaded || !hadController) return;
+    reloaded = true;
+    window.location.reload();
+  });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      if (reg && reg.update) { try { reg.update(); } catch (_) {} }
+    }).catch(() => {});
+  });
 }
 
 const installArea = $('#install-area');
