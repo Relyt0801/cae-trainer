@@ -3361,7 +3361,12 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   });
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
-      if (reg && reg.update) { try { reg.update(); } catch (_) {} }
+      if (!reg) return;
+      const check = () => { try { reg.update(); } catch (_) {} };
+      check();
+      // Auch lange geöffnete Geräte sollen Updates erhalten:
+      setInterval(check, 30 * 60 * 1000);                 // regelmäßig prüfen
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) check(); });
     }).catch(() => {});
   });
 }
