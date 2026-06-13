@@ -2,7 +2,7 @@
    HTML/Navigation: network-first; statische Assets: cache-first.
    Es werden NUR erfolgreiche (200) Antworten gecacht — so kann nie ein
    404/Fehler/leere Seite zwischengespeichert werden. */
-const CACHE = 'cae-trainer-v5';
+const CACHE = 'cae-trainer-v6';
 const ASSETS = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

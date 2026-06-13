@@ -2545,7 +2545,11 @@ function saveScore(catId, pct, passed) {
   const best = Math.max(prevBest, pct);
   const history = (Array.isArray(prev.history) ? prev.history : []).concat([{ p: pct, t: Date.now() }]);
   while (history.length > 40) history.shift();
-  all[catId] = { pct, passed, when: Date.now(), best, attempts: (prev.attempts || 0) + 1, history };
+  const attempts = (prev.attempts || 0) + 1;
+  // Laufende Summe aller Einheiten-Prozente -> exakter Durchschnitt (unabhängig vom history-Limit)
+  const prevSum = (typeof prev.sum === 'number') ? prev.sum : (prev.pct || 0) * (prev.attempts || 0);
+  const sum = prevSum + pct;
+  all[catId] = { pct, passed, when: Date.now(), best, attempts, sum, history };
   try { localStorage.setItem(STORE_KEY, JSON.stringify(all)); } catch (_) {}
 }
 function resetScores() {
@@ -2590,6 +2594,22 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+/* Antwortoptionen je MC-Frage zufällig anordnen, damit nicht immer dieselbe
+   Position (z.B. A) richtig ist. correct/also werden auf die neue Reihenfolge
+   abgebildet. Bei Multiple Matching übersprungen (Optionen sind feste Namen). */
+function randomizeOptions(questions, skip) {
+  if (skip) return questions;
+  return questions.map(q => {
+    if (q.type !== 'mc' || !Array.isArray(q.options) || q.options.length < 2) return q;
+    const order = shuffle(q.options.map((_, i) => i));   // neue -> alte Position
+    const options = order.map(i => q.options[i]);
+    const remap = oldI => order.indexOf(oldI);
+    const nq = Object.assign({}, q, { options });
+    if (typeof q.correct === 'number') nq.correct = remap(q.correct);
+    if (Array.isArray(q.also)) nq.also = q.also.map(remap);
+    return nq;
+  });
 }
 
 /* ---------------- Bewertung ---------------- */
@@ -2656,7 +2676,7 @@ function buildSession(catId) {
     questions = pickTransforms(c, c.sessionLength);
   } else {
     passage = pickPassage(c);
-    questions = passage.questions;
+    questions = randomizeOptions(passage.questions, passage.kind === 'mm');
   }
   session = { cat: c, passage, questions, answers: {}, idx: 0 };
 }
@@ -2689,6 +2709,14 @@ const ICON_STACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 const ICON_LOOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6h-6"/><path d="M4 19v-6h6"/><path d="M19.3 11A7.6 7.6 0 0 0 6 7.3L4 9.2M4.7 13A7.6 7.6 0 0 0 18 16.7l2-1.9"/></svg>';
 
 function bestOf(s) { return s ? (s.best != null ? s.best : s.pct) : 0; }
+/* Durchschnitt aller in der Kategorie absolvierten Einheiten. */
+function avgOf(s) {
+  if (!s) return 0;
+  if (typeof s.sum === 'number' && s.attempts) return s.sum / s.attempts;
+  if (Array.isArray(s.history) && s.history.length)
+    return s.history.reduce((n, h) => n + h.p, 0) / s.history.length;
+  return s.pct || 0;
+}
 
 function ringSvg(pct) {
   const R = 26, C = 2 * Math.PI * R;
@@ -2704,7 +2732,7 @@ function ringSvg(pct) {
 
 function progressHtml(s, emptyLabel) {
   if (s) {
-    const best = bestOf(s);
+    const best = avgOf(s);
     const bp = Math.round(best * 100);
     const passed = best >= PASS_THRESHOLD;
     const cls = passed ? 'pass' : 'fail';
@@ -2740,10 +2768,16 @@ function renderHome() {
   const useOfEnglish = DATA.categories.filter(c => c.id.startsWith('part'));
   const readingCats = DATA.categories.filter(c => c.type === 'reading');
 
-  // Hero: Ring (Ø Bestwert über alle 6 Modi) + Sessions-Chip
+  // Hero: Ring = Ø über ALLE absolvierten Einheiten (Summe aller Prozente / Anzahl Einheiten)
   const allIds = DATA.categories.map(c => c.id).concat(['exam']);
-  const avg = allIds.reduce((n, id) => n + bestOf(scores[id]), 0) / allIds.length;
-  const attempts = allIds.reduce((n, id) => n + (scores[id] ? (scores[id].attempts || 0) : 0), 0);
+  let totSum = 0, attempts = 0;
+  allIds.forEach(id => {
+    const s = scores[id];
+    if (!s || !s.attempts) return;
+    totSum += (typeof s.sum === 'number') ? s.sum : avgOf(s) * s.attempts;
+    attempts += s.attempts;
+  });
+  const avg = attempts ? totSum / attempts : 0;
   $('#hero-ring').innerHTML = ringSvg(avg);
   $('#hero-chips').innerHTML = attempts > 0
     ? `<span class="chip">${ICON_LOOP}<b>${attempts}</b>&nbsp;${attempts === 1 ? 'Session' : 'Sessions'} absolviert</span>`
@@ -3156,11 +3190,11 @@ function buildExamStage(spec) {
     label = `${c.shortName} · ${c.name}`;
   } else if (c.type === 'reading') {
     passage = pickPassage(c, spec.kind);
-    questions = passage.questions;
+    questions = randomizeOptions(passage.questions, spec.kind === 'mm');
     label = spec.kind === 'mm' ? 'Reading · Multiple Matching' : 'Reading · Multiple Choice';
   } else {
     passage = pickPassage(c);
-    questions = passage.questions;
+    questions = randomizeOptions(passage.questions, passage.kind === 'mm');
     label = `${c.shortName} · ${c.name}`;
   }
   session = { cat: c, passage, questions, answers: {}, idx: 0, exam: true, examLabel: label };
