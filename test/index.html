@@ -2612,18 +2612,30 @@ function isCorrect(q, answer) {
 let session = null;
 
 /* ---------------- Anti-Wiederholung ---------------- */
-let recentPassage = {};      // key -> zuletzt gezeigter Passagen-Titel
+let recentPassage = {};      // key -> Warteschlange zuletzt gezeigter Passagen-Titel
 let recentTransforms = [];   // Warteschlange zuletzt genutzter Transformations-Sätze
 
 function pickPassage(c, kind) {
   let ps = c.passages;
   let key = c.id;
   if (kind) { ps = ps.filter(p => p.kind === kind); key = c.id + ':' + kind; }
-  if (ps.length <= 1) { if (ps[0]) recentPassage[key] = ps[0].title; return ps[0]; }
-  const last = recentPassage[key];
-  const pool = ps.filter(p => p.title !== last);
+  if (!ps.length) return null;
+  if (ps.length === 1) return ps[0];
+
+  let recent = recentPassage[key] || [];
+  // Erst alle noch nicht gezeigten Texte nutzen — so kommt nie ein Text doppelt,
+  // bevor nicht jeder andere Text dieses Modus an der Reihe war.
+  let pool = ps.filter(p => recent.indexOf(p.title) === -1);
+  if (!pool.length) {                         // ganzer Zyklus durch -> zurücksetzen
+    const last = recent[recent.length - 1];   // nur den allerletzten weiter meiden
+    recent = last ? [last] : [];
+    pool = ps.filter(p => p.title !== last);
+    if (!pool.length) pool = ps.slice();
+  }
   const choice = pool[Math.floor(Math.random() * pool.length)];
-  recentPassage[key] = choice.title;
+  recent.push(choice.title);
+  while (recent.length > ps.length - 1) recent.shift(); // höchstens (n-1) merken
+  recentPassage[key] = recent;
   return choice;
 }
 function pickTransforms(c, n) {
